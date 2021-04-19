@@ -10,5 +10,10 @@ public class DefaultController {
     public String login() {
         return "login.html";
     }
-    
+
+//    @RequestMapping("/statsArtists")
+//    public String getStatsArtists() {
+//        return "login.html";
+//    }
+
 }

@@ -13,10 +13,10 @@ public class Track {
     HashMap<String,String> external_ids;
     HashMap<String,String> external_urls;
     String href;
-    String id;
+    public String id;
     boolean is_local;
-    String name;
-    int popularity;
+    public String name;
+    public int popularity;
     String preview_url;
     int track_number;
     String type;

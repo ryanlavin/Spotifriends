@@ -13,6 +13,6 @@
 
 app:
   datasource:
-    jdbc-url: jdbc:postgresql:///{spotifriends_db}?socketFactory=com.google.cloud.sql.postgres.SocketFactory&cloudSqlInstance={spotifriends:us-west2:spotifriends-db}:{spotifriends_db}
+    jdbc-url: jdbc:postgresql:///spotifriends_db?socketFactory=com.google.cloud.sql.postgres.SocketFactory&cloudSqlInstance=spotifriends:us-west2:spotifriends-db
     username: postgres
     password: patrickTheGoat69

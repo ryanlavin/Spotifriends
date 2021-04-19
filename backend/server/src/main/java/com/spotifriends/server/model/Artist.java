@@ -7,12 +7,12 @@ public class Artist {
 
     HashMap<String,String> external_urls;
     Followers followers;
-    ArrayList<String> genres;
+    public ArrayList<String> genres;
     String href;
-    String id;
-    ArrayList<Image> images;
-    String name;
-    int popularity;
+    public String id;
+    public ArrayList<Image> images;
+    public String name;
+    public int popularity;
     String type;
     String uri;
 

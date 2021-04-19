@@ -22,6 +22,6 @@ public class NewUserService {
         return newUserDao.addNewUser(nu);
     }
 
-    public ArrayList<NewUser> getNewUsers() { return newUserDao.getNewUsers(); }
+    public String getNewUsers() { return newUserDao.getNewUsers(); }
 
 }

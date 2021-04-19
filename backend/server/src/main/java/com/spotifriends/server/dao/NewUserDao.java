@@ -8,6 +8,6 @@ public interface NewUserDao {
 
     int addNewUser(NewUser nu);
 
-    ArrayList<NewUser> getNewUsers();
+    String getNewUsers();
 
 }

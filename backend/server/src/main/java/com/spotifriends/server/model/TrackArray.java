@@ -3,7 +3,7 @@ package com.spotifriends.server.model;
 import java.util.ArrayList;
 
 public class TrackArray {
-    ArrayList<Track> items;
+    public ArrayList<Track> items;
     int total;
     int limit;
     int offset;

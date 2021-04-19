@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
-@RequestMapping("register")
+@RequestMapping("/register")
 @RestController
 public class NewUserController {
 
@@ -27,5 +27,5 @@ public class NewUserController {
     }
 
     @GetMapping
-    public ArrayList<NewUser> getNewUsers() { return newUserService.getNewUsers(); }
+    public String getNewUsers() { return newUserService.getNewUsers(); }
 }

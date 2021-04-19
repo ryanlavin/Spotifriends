@@ -3,7 +3,7 @@ package com.spotifriends.server.model;
 import java.util.ArrayList;
 
 public class ArtistArray {
-    ArrayList<Artist> items;
+    public ArrayList<Artist> items;
     int total;
     int limit;
     int offset;

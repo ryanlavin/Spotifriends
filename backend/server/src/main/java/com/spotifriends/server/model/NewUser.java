@@ -14,31 +14,31 @@ import java.util.Map;
 
 public class NewUser {
 
-    private final String accessCode;
-    private final String email;
-    private final String password;
-    private final String token;
+    public final String accessCode;
+    public final String username;
+    public final String password;
+    public final String token;
     public TrackArray trackArray;
     public ArtistArray artistArray;
 
     public NewUser (@JsonProperty("accessCode") String accessCode,
-                    @JsonProperty("email") String email,
+                    @JsonProperty("username") String username,
                     @JsonProperty("password") String password)
     {
         this.accessCode = accessCode;
-        this.email = email;
+        this.username = username;
         this.password = password;
 
 //        this.getToken();
-        this.token = "BQAytQJvZ9qr2QaVd8vxu-zX5xXTemJ2NIfrzpajxaqs-y4aM00Em8akwQmzBNmSx_wtSUQQm07uyltDu9Lni5yC8AoSxF2oUQI9zstGQmpkabk_s9Ye1y6nuBX4n3zWhPgmn0L8RdLwZB0OAxecEXyAqPSuuKyWL3A8MTytsEKhk6jdQdYQsvZ_u76LQ3SnhyZZ6G3Hv68VHTDf_0dDJTpaNhW4lBIH0Zxe0-seYdRYAhrpQdTOpb9gIdg3xmc_8Y7pxd2b3c88IkkRVwG9Pg";
+        this.token = "BQDmJvNxWFNnoJnGSDFnf5pK_ceFZxoo4Dn-1R5fsX6NtMD6ZPbzLzBSY98Vu3kFm_v85KSZ5I1EukeWuVapz1oY81aCrhfvz7ZpT-ebi3sHMHES5GXxrxlMA1nGOhu3Uk-G4S3VtHFz-SoQy0ZSJSnYm-PCqjB8fLbOsF2vl7WTwamQHnOySEzHPRLz77qQTKA-L8g3fn8WOqyife5a1M0rgMJ6lKk2Qq_mOqqrmkthyIcujUUcUEM7AiO56F28QNp37_aORUB8KyAQIg4tpQ";
         this.getTopData("tracks");
         System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
         this.getTopData("artists");
 
     }
 
-    public String getEmail() {
-        return email;
+    public String getUsername() {
+        return username;
     }
 
     public String getPassword() {
@@ -102,7 +102,7 @@ public class NewUser {
             String client_secret = env.get("CLIENT_SECRET");
             String client_id = env.get("CLIENT_ID");
 
-            URL url = new URL("https://api.spotify.com/v1/me/top/" + tracks_or_artists + "?time_range=medium_term&limit=2&offset=0");
+            URL url = new URL("https://api.spotify.com/v1/me/top/" + tracks_or_artists + "?time_range=medium_term&limit=10&offset=0");
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.setRequestMethod("GET");
             con.setRequestProperty("Accept", "application/json");
