@@ -2,8 +2,10 @@
 
 /* Add a black background color to the top navigation */
 .topnav {
-  background-color: #333;
+  background-color: #3B3B3B;
   overflow: hidden;
+  border-radius: 0px 0px 10px 10px;
+  height: 15%;
 }
 
 /* Style the links inside the navigation bar */
@@ -11,18 +13,20 @@
   float: right;
   color: #f2f2f2;
   text-align: center;
-  padding: 14px 16px;
+  padding: 26px 18px;
   text-decoration: none;
-  font-size: 17px;
+  font-size: 30px;
+  height: 100%;
 }
 
 .topnav .logo {
   float: left;
   color: #f2f2f2;
   text-align: center;
-  padding: 14px 16px;
+  padding: 20px 14px;
   text-decoration: none;
-  font-size: 17px;
+  font-size: 40px;
+  height: 100%;
 }
 
 /* Change the color of links on hover */
@@ -33,6 +37,14 @@
 
 /* Add a color to the active/current link */
 .topnav .logo {
-  background-color: #4CAF50;
+  /* background-color: #1ED760; */
   color: white;
+}
+
+.topnav #Profile {
+  padding-right: 35px;
+}
+
+.topnav img {
+  float: left;
 }

@@ -36,3 +36,13 @@
     transform: rotate(360deg);
   }
 }
+
+#Background {
+  background-color: #262626;
+  color: #262626;
+  height: 100%;
+  width: 100%;
+}
+
+
+

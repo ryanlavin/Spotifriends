@@ -9,7 +9,7 @@ import NavBar from './components/NavBar';
 
 function App() {
   return (
-    <div className="App">
+    <div id="Background" className="App">
       <NavBar/>
       <Route exact path="/" component={Dashboard} />
       <Route exact path="/dashboard" component={Dashboard} />
