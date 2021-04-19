@@ -1,6 +1,7 @@
 package com.spotifriends.server.dao;
 
 import com.spotifriends.server.model.NewUser;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -12,6 +13,8 @@ public class FakeNewUserDataAccessService implements NewUserDao {
 
     @Override
     public int addNewUser(NewUser nu) {
+        JdbcTemplate jdbcTemplate = new JdbcTemplate();
+        System.out.println(jdbcTemplate.queryForList("SELECT * FROM user_table;"));
         DB.add(nu);
         return 1;
     }

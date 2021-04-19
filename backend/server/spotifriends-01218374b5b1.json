@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "spotifriends",
+  "private_key_id": "01218374b5b1ccc9a19512e290bcd21beeee0ed2",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDNW7UaX9ymYtnk\nGW7anMgnBKT1uIVVvOyt2iMEjZLD7IEVb9OokVtjGKNHSVOWpPgmB6+0OgkQuE8O\nf/v8gnpEVyf2UXxBBT6TrbQ59fyTYhX0EmwYkUnklB5VDmZy9CnIPSmHdU6SFxm4\nLHDGxx5xsZrRWYDxQBrG6byTkCw5j4LjLk3LQrGWEmQdbgU3D/I5/RcZBMEmUFSG\nhQ06BGke4A5meWWa63P9eVQbLgzh9IwatE12ajO9ILxr7lJNtZWCQFMyP/dTQgHq\nD/D9QVyFLBBA9clOzqa7NTiAiJttdqYl50bH9knj2/bCTjwTJW0OnLap6E96piCe\nf49oVnFJAgMBAAECggEAB8RXZPjZn4qR1JEbL/DEgl2dj8RzuOP5PNPpJZBlYTG6\nNJ67A0SYekwkYctNz77rz+6+vXWWoe+h9X8Pn2kVGYMFNN63sRMIab1k7tkanVLq\ngxA+zyOQnJuhtY8YFB00vC5xr4jsk1/aYMyVKTQprDxpdKVQAt/ihgyGrbtDAZwW\nSBD4ybNM5dkLen8Sg3P4nmN13pvMQsdMkyxeZvu2SHhK9MvyoAIFKNOGz9rbp+cH\n6mQMv6LDIhbxbEfSd5FBpom4OEovqP3L2H/n1n2FGfY0UqWme0EKp5thhwKHVZZW\no7hFCwP4ehHHMPZfJWCSZ29GTT9OdbPeQUw5aV5U8QKBgQDu1Vn0j4/q4t98ua9k\nzl6gz9X5aNkTbxeHfe2oB75b53djuJUKzRlzFb8aYsjcVl/wTE9fFfSKkp66xS0O\ny6bIJs2nTkWfEynGU1eervQD4TgLyKI+T6D8b8SZ8gNPB8nrWfPlRyV73ICGxdZI\nlMKfhu7jrgeNLawxqGTG83ngcQKBgQDcHmWb8mqp+RPlF3nby+Gh74NUtjvhkkao\n6hP9ch+ANl9dw/TYMKO9DshHW1k/LxzxjbgPpwLpMXRBjLzSq1VrKfKH4SFVadHf\nhwesmsCYyIRbEW646zMzOUoFnpit7+RvJ9PI20qdgk6Fp4XwSsnHKiqsYpvEslq5\nRNlNvOMKWQKBgAiFL/pbjMTSZyqp7SnpetK912JYbTYWRn6c7XeLHy1kKowyL479\nFiVW50Rntca2hiGqd0JrJBg1dtgu5JaciUympbuMPUuZgWoD2yJcF3Rz+m3hMHiM\nmq+mxRrA2YFeQ8PTp7HMQfgTO7qTIDviorbSN3+D290bfgMfgMjgMr7hAoGBAJ98\n0sh8i/ZeB6E9MkkkX3bSsQinBZo6P0JSYGuJzfM68jxhKD2geHMai9jQAkk6nLEU\nqyGENCK8d2yrSYEnLTv5Z8Y2Q828X5mjH9dbRWMuHmBRsDUCDdX2k4Cg2iVlJNG5\nPMVSxqx7ZuOGbxCdT7gkAElpJU4OoJeOoBioXKT5AoGBAIMnCS46PXJe8ZjwmdSc\nPhDtsjkwKQsT1jjKf9cSRPBB4bJFRLQ+ntpzL9hubnJ0bEKfZJ9gyQMhh2QnJ18O\njebPB2iQFQvE147JcXHhqjhWYQHLnnR0g+4rI7DO41lINdu7WbSctQ430ODfERr8\nzb4kw+ybDhLqDZFeaDODhTCT\n-----END PRIVATE KEY-----\n",
+  "client_email": "arman-123@spotifriends.iam.gserviceaccount.com",
+  "client_id": "116411290578041315132",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/arman-123%40spotifriends.iam.gserviceaccount.com"
+}

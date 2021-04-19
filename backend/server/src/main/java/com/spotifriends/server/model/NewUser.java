@@ -1,6 +1,7 @@
 package com.spotifriends.server.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.gson.Gson;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -17,6 +18,8 @@ public class NewUser {
     private final String email;
     private final String password;
     private final String token;
+    public TrackArray trackArray;
+    public ArtistArray artistArray;
 
     public NewUser (@JsonProperty("accessCode") String accessCode,
                     @JsonProperty("email") String email,
@@ -27,8 +30,10 @@ public class NewUser {
         this.password = password;
 
 //        this.getToken();
-        this.token = "BQDyVBsL-7cYmDRZE-cYka4sz_ZprQ7nmj7msYNWl2oqTim2dT6Kbs7ER8LL9PhLs3rLp9UbrlYeuGok4N_G7uDcCvbpPvC7VwLaCfbXD4dfznpz1wBR_v8Ge0bsOOLOFudTx_QJgIbnFzKAg0N8-WYtX_AumrQ3_baJGAKnqrBv3CNElQWOzPUubj34ijYIsqBbF5EwROlbvmySW5CX2PavY1G79RTrujOqVQu0xBWJVPsHmN1QqJRu9LOFQpyv86dSsUhsqHgiOXdh17MYrg";
-        this.getTopData();
+        this.token = "BQAytQJvZ9qr2QaVd8vxu-zX5xXTemJ2NIfrzpajxaqs-y4aM00Em8akwQmzBNmSx_wtSUQQm07uyltDu9Lni5yC8AoSxF2oUQI9zstGQmpkabk_s9Ye1y6nuBX4n3zWhPgmn0L8RdLwZB0OAxecEXyAqPSuuKyWL3A8MTytsEKhk6jdQdYQsvZ_u76LQ3SnhyZZ6G3Hv68VHTDf_0dDJTpaNhW4lBIH0Zxe0-seYdRYAhrpQdTOpb9gIdg3xmc_8Y7pxd2b3c88IkkRVwG9Pg";
+        this.getTopData("tracks");
+        System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+        this.getTopData("artists");
 
     }
 
@@ -91,38 +96,44 @@ public class NewUser {
         }
     }
 
-    public void getTopData() {
+    public void getTopData(String tracks_or_artists) {
         try {
             Map<String, String> env = System.getenv();
             String client_secret = env.get("CLIENT_SECRET");
             String client_id = env.get("CLIENT_ID");
 
-            URL url = new URL("https://api.spotify.com/v1/me/top/tracks?time_range=medium_term&limit=50&offset=0");
+            URL url = new URL("https://api.spotify.com/v1/me/top/" + tracks_or_artists + "?time_range=medium_term&limit=2&offset=0");
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.setRequestMethod("GET");
             con.setRequestProperty("Accept", "application/json");
             con.setRequestProperty("Content-Type", "application/json");
             con.setRequestProperty("Authorization", "Bearer " + this.token);
             int responseCode = con.getResponseCode();
+
+            String js = "";
+
             if (responseCode == HttpURLConnection.HTTP_OK) { // success
                 BufferedReader in = new BufferedReader(new InputStreamReader(
                         con.getInputStream()));
                 String line;
                 while ((line = in.readLine()) != null) {
                     System.out.println(line);
+                    js += line;
                 }
-                //            String empty = in.readLine();
-                //            String inputLine = in.readLine();
-                //			System.out.println(inputLine);
-                //            String[] fields = inputLine.split(",");
-                //            closePrice = Float.parseFloat(fields[1]);
                 in.close();
                 con.disconnect();
-                //            return closePrice;
+                Gson gson = new Gson();
+
+                if (tracks_or_artists == "tracks") {
+                    this.trackArray = gson.fromJson(js, TrackArray.class);
+                    System.out.println(this.trackArray);
+                } else {
+                    this.artistArray = gson.fromJson(js, ArtistArray.class);
+                    System.out.println(this.artistArray);
+                }
             } else {
                 System.out.println(responseCode);
                 System.out.println("GET request failed in Server when getting top data.");
-                //            return -1;
             }
 
         } catch (ProtocolException e) {

@@ -14,7 +14,7 @@ public class NewUserService {
     private final NewUserDao newUserDao;
 
     @Autowired
-    public NewUserService(@Qualifier("fakeDao") NewUserDao newUserDao) {
+    public NewUserService(@Qualifier("cloud") NewUserDao newUserDao) {
         this.newUserDao = newUserDao;
     }
 
