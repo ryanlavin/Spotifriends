@@ -1,7 +1,8 @@
 import React from "react";
 
 import FormInput from "./input-component";
-import '../css/login.css';
+//import '../css/login.css';
+
 
 function onClick() {
     return null;
@@ -16,31 +17,44 @@ class Login extends React.Component {
         };
     }
 
-    handleChange = event => {
-        this.setState({
-            username : event.target.value,
-            password : event.target.value
-        });
+
+    handleSubmit = event => {
+        event.preventDefault();
+        this.setState({username: '', password: ''});
     };
+
+    handleChange = event => {
+        const {value, name} = event.target;
+
+        this.setState({[name]: value});
+    };
+
 
     render() {
         return (
             <div className='sign-in'>
                 <h2>Login-In Form</h2>
                 <React.Fragment>
-                    <input
+		<form onSubmit={this.handleSubmit}>
+                    <FormInput
                         type="text"
                         name="username"
                         value={this.state.username}
+                        handleChange={this.handleChange}
+                        label="username"
+                        required
                     />
-                    <input
+                    <FormInput
                         type="text"
                         name="password"
                         value={this.state.password}
+                        handleChange={this.handleChange}
+                        label="password"
+                        required
                         />
                     <button
-                        onPress = {this.handleChange}
-                        />
+                        type="submit"> Sign In </button>
+		</form>
                 </React.Fragment>
             </div>
         );
