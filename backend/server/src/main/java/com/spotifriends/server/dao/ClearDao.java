@@ -4,10 +4,8 @@ import com.spotifriends.server.model.NewUser;
 
 import java.util.ArrayList;
 
-public interface NewUserDao {
+public interface ClearDao {
 
-    String addNewUser(NewUser nu);
-
-    String getNewUsers();
+    int clear();
 
 }

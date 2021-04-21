@@ -29,6 +29,22 @@ public class Artist {
         this.uri = uri;
     }
 
+    public String[] getGenres() {
+        String[] genres = new String[this.genres.size()];
+        for (int i=0; i<this.genres.size(); i++) {
+            genres[i] = this.genres.get(i);
+        }
+        return genres;
+    }
+
+    public String[] getImages() {
+        String[] images = new String[this.images.size()];
+        for (int i=0; i<this.images.size(); i++) {
+            images[i] = this.images.get(i).url;
+        }
+        return images;
+    }
+
     @Override
     public String toString() {
         return "Artist{" +

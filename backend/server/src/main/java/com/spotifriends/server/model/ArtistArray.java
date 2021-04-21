@@ -21,6 +21,10 @@ public class ArtistArray {
         this.next = next;
     }
 
+    public int size() {
+        return items.size();
+    }
+
     @Override
     public String toString() {
         return "ArtistArray{" +

@@ -28,13 +28,21 @@ public class NewUser {
         this.accessCode = accessCode;
         this.username = username;
         this.password = password;
+        this.token = "BQCoiXXviCzzohqEpTk5itCsgy9-Ux7vy1pWYJO9scFd76INrl2jtyme_xHlHm73EVfzyoJASIJq1fu3zK3mCPtdAupKdPx1Sjjuu5nNpwM2sK-JAI_bJCWXByucQ19isGHiAydF6P5iZXYhr2PheABO8yiTmAaFj7S1Np_xt_AmbPfACNX4sQSA1XcZQszQP2747YGAe1DfYNMkbsxUEgQdovaF37gy--sAUM5HYv06lIFWiMCYHuvePnWB0m-ZE54w8guGsl_URdMDa6b4wg";
 
+
+
+    }
+
+    public String validate() {
 //        this.getToken();
-        this.token = "BQDmJvNxWFNnoJnGSDFnf5pK_ceFZxoo4Dn-1R5fsX6NtMD6ZPbzLzBSY98Vu3kFm_v85KSZ5I1EukeWuVapz1oY81aCrhfvz7ZpT-ebi3sHMHES5GXxrxlMA1nGOhu3Uk-G4S3VtHFz-SoQy0ZSJSnYm-PCqjB8fLbOsF2vl7WTwamQHnOySEzHPRLz77qQTKA-L8g3fn8WOqyife5a1M0rgMJ6lKk2Qq_mOqqrmkthyIcujUUcUEM7AiO56F28QNp37_aORUB8KyAQIg4tpQ";
+//        if (this.token.equals("COULD NOT GET TOKEN")) {
+//            return "COULD NOT GET TOKEN";
+//        }
         this.getTopData("tracks");
         System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
         this.getTopData("artists");
-
+        return "GOT TOKEN";
     }
 
     public String getUsername() {
@@ -49,7 +57,23 @@ public class NewUser {
         return accessCode;
     }
 
-    public void getToken() {
+    public String[] getTracks() {
+        String[] trackIds = new String[this.trackArray.size()];
+        for (int i=0; i < this.trackArray.size(); i++) {
+            trackIds[i] = this.trackArray.items.get(i).id;
+        }
+        return trackIds;
+    }
+
+    public String[] getArtists() {
+        String[] artistIds = new String[this.artistArray.size()];
+        for (int i=0; i < this.artistArray.size(); i++) {
+            artistIds[i] = this.artistArray.items.get(i).id;
+        }
+        return artistIds;
+    }
+
+    public String getToken() {
         try {
             Map<String, String> env = System.getenv();
             String client_secret = env.get("CLIENT_SECRET");
@@ -83,9 +107,10 @@ public class NewUser {
                 in.close();
                 con.disconnect();
     //            return closePrice;
+                return "GOT TOKEN";
             } else {
                 System.out.println("GET request failed in Server. Either an invalid date or ticker was present.");
-    //            return -1;
+                return "COULD NOT GET TOKEN";
             }
         } catch (ProtocolException e) {
             e.printStackTrace();
@@ -94,6 +119,7 @@ public class NewUser {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return "COULD NOT GET TOKEN";
     }
 
     public void getTopData(String tracks_or_artists) {
@@ -145,4 +171,15 @@ public class NewUser {
         }
     }
 
+    @Override
+    public String toString() {
+        return "NewUser{" +
+                "accessCode='" + accessCode + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", token='" + token + '\'' +
+                ", trackArray=" + trackArray +
+                ", artistArray=" + artistArray +
+                '}';
+    }
 }

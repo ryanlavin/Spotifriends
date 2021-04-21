@@ -20,6 +20,9 @@ public class TrackArray {
         this.href = href;
         this.next = next;
     }
+    public int size() {
+        return items.size();
+    }
 
     @Override
     public String toString() {
