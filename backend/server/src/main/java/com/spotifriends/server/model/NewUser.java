@@ -28,7 +28,7 @@ public class NewUser {
         this.accessCode = accessCode;
         this.username = username;
         this.password = password;
-        this.token = "BQCoiXXviCzzohqEpTk5itCsgy9-Ux7vy1pWYJO9scFd76INrl2jtyme_xHlHm73EVfzyoJASIJq1fu3zK3mCPtdAupKdPx1Sjjuu5nNpwM2sK-JAI_bJCWXByucQ19isGHiAydF6P5iZXYhr2PheABO8yiTmAaFj7S1Np_xt_AmbPfACNX4sQSA1XcZQszQP2747YGAe1DfYNMkbsxUEgQdovaF37gy--sAUM5HYv06lIFWiMCYHuvePnWB0m-ZE54w8guGsl_URdMDa6b4wg";
+        this.token = "BQBXg2PQhqCd-NeZcmm-2xNZoyvUETlYGdTXzNUqOmjBr8u4ctiUxcetHz2qLfdwqda6F6z8DMvNsTo57MIIuZbX4P2d_P5X-lk8tkucGOtm9bw-d6IVHjja13flNAugNore5sgdSx5k4vG_GnPBHYOugD7MTAXhuZ5KSM-L5jy3UNvNLamuSxMEYylif6ZwMH69tY1vMGVZbStFgzMVHy1WTJtIVbkq5EPQI3n3vhjW9WcSM-u1a2yeZ89lSiCtSPu2mJvUooF4dk-AgJIlGw";
 
 
 
