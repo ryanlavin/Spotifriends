@@ -17,13 +17,11 @@ class Login extends React.Component {
 
     handleLogin = (event) => {
         event.preventDefault();
-        console.log("just logged in w ");
         axios.post("https:localhost:8080/login-api",
             {
                 "username": this.state.loginUsername,
                 "password": this.state.loginPassword
             });
-        console.log("just logged in w ");
         this.setState({ loginUsername: "", loginPassword: "" });
     };
 
@@ -35,15 +33,12 @@ class Login extends React.Component {
 
     handleRegister = (event) => {
         event.preventDefault();
-        console.log("just registered w ", this.state.registerUsername, "   ", this.state.registerPassword);
-
         axios.post("https:localhost:8080/register-api",
         {
             "username": this.state.registerUsername,
             "password": this.state.registerPassword
         }
         );
-        console.log("just registered w ", this.state.registerUsername, "   ", this.state.registerPassword);
         this.setState({registerUsername: "", registerPassword: ""});
     };
     render() {
