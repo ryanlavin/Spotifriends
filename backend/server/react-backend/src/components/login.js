@@ -3,10 +3,6 @@ import "../css/login.css";
 import FormInput from "./input-component";
 //import '../css/login.css';
 
-function onClick() {
-  return null;
-}
-
 class Login extends React.Component {
   constructor(props) {
     super(props);
