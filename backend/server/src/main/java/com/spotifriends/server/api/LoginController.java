@@ -1,6 +1,7 @@
 package com.spotifriends.server.api;
 
 //import org.flywaydb.core.internal.jdbc.JdbcTemplate;
+import com.spotifriends.server.model.UsernamePassword;
 import com.spotifriends.server.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -21,9 +22,9 @@ public class LoginController {
     }
 
     @PostMapping
-    public String login(@RequestBody String username, @RequestBody String password) {
+    public String login(@RequestBody UsernamePassword up) {
         // returns sessionId
-        return "{ \"session\": \"" + loginService.login(username, password) + "\"}";
+        return "{ \"session\": \"" + loginService.login(up.username, up.password) + "\"}";
     }
 
 }

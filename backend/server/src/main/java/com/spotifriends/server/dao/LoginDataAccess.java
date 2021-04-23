@@ -15,12 +15,14 @@ public class LoginDataAccess implements LoginDao {
 
     private final JdbcTemplate jdbcTemplate;
     public LoggedInQueue queue;
+    public SessionManager manager;
 
 
     @Autowired
     public LoginDataAccess(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
         this.queue = new LoggedInQueue();
+        this.manager = new SessionManager(this.queue);
 
     }
 

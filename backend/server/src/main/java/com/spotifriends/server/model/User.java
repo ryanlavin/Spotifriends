@@ -6,12 +6,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class User {
-    String username;
-    String password;
-    ArrayList<String> artists;
-    ArrayList<String> tracks;
-    ArrayList<String> friends;
-    boolean priv;
+    public String username;
+    public String password;
+    public ArrayList<String> artists;
+    public ArrayList<String> tracks;
+    public ArrayList<String> friends;
+    public boolean priv;
 
     public User(String username, String password, Array artists, Array tracks, Array friends, boolean priv) {
         this.username = username;

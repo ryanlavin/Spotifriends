@@ -15,8 +15,10 @@ public class SessionManager extends Thread {
         this.queue = queue;
     }
 
+    @Override
     public void run() {
         while (true) {
+            System.out.print("run.");
             if (queue.users.size() == 0) {
                 Thread.yield();
                 continue;

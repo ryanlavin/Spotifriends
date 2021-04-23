@@ -13,14 +13,14 @@ public class LoggedInQueue {
         if (this.users == null) {
             System.out.println("NEW QUEUE CREATED!!!");
             this.users = new LinkedList<LoggedInUser>();
-            this.manager = new SessionManager(this);
-            this.manager.run();
+//            this.manager = new SessionManager(this);
+//            this.manager.run();
         }
     }
 
     public synchronized String getUser(String username) {
         for (LoggedInUser u : users) {
-            if (u.username == username) {
+            if (u.username.equals(username)) {
                 return u.session;
             }
         }

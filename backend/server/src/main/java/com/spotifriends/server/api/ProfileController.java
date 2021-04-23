@@ -1,12 +1,12 @@
 package com.spotifriends.server.api;
 
 //import org.flywaydb.core.internal.jdbc.JdbcTemplate;
-import com.spotifriends.server.service.LoginService;
+import com.spotifriends.server.model.UsernameSession;
+import com.spotifriends.server.model.UsernameSessionFriend;
+import com.spotifriends.server.model.UsernameSessionPriv;
 import com.spotifriends.server.service.ProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
 
 @RequestMapping("/profile-api")
 @RestController
@@ -21,10 +21,20 @@ public class ProfileController {
         this.profileService = profileService;
     }
 
+    @PostMapping
+    public String addFriend(@RequestBody UsernameSessionFriend usf) {
+        return "{\"code\":\"" + profileService.addFriend(usf.username, usf.session, usf.friend_name) + "\"}";
+    }
+
+    @PutMapping
+    public String changePrivacy(@RequestBody UsernameSessionPriv usp){
+        return "{\"code\":\"" + profileService.changePrivacy(usp.username, usp.session, usp.priv) + "\"}";
+    }
+
     @GetMapping
-    public String getProfileData(@RequestBody String username, @RequestBody String session) {
+    public String getProfileData(@RequestBody UsernameSession us) {
         // returns sessionId
-        return profileService.getProfileData(username, session);
+        return profileService.getProfileData(us.username, us.session);
     }
 
 }

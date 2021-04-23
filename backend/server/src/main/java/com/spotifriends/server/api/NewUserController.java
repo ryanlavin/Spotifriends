@@ -25,13 +25,13 @@ public class NewUserController {
     public String addNewUser(@RequestBody NewUser nu) {
         String tok = nu.validate();
         if (tok.equals("COULD NOT GET TOKEN")) {
-            return "{code:" + tok + "}";
+            return "{\"code\":\"" + tok + "\"}";
         }
         if (nu.username.equals("") || nu.password.equals("")) {
-            return "{code: EMPTY USERNAME OR PASSWORD }";
+            return "{\"code\": \"EMPTY USERNAME OR PASSWORD\" }";
         }
         String response = newUserService.addNewUser(nu);
-        return "{code:" + response + "}";
+        return "{\"code\":\"" + response + "\"}";
     }
 
     @GetMapping
