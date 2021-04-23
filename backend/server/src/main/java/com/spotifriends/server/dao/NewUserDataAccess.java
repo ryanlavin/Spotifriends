@@ -75,8 +75,10 @@ public class NewUserDataAccess implements NewUserDao {
         List<User> u = jdbcTemplate.query(checkUsername, new Object[]{nu.username}, (rs, rowNum) -> {
                     return new User(rs.getString("username"), rs.getString("password"), rs.getArray("artists"), rs.getArray("tracks"), rs.getArray("friends"), rs.getBoolean("private"));
                 });
-        if (u != null && u.size() != 0) {
-            return "USERNAME ALREADY EXISTS";
+        if (u != null) {
+             if (u.size() != 0) {
+                return "USERNAME ALREADY EXISTS";
+             }
         }
             //String username, String password, Array artists, Array tracks, Array friends, boolean priv
 
