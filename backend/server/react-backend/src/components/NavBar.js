@@ -27,6 +27,7 @@ function NavBar() {
             .topBar{
                 display:flex;
                 flex-direction:row;
+                align-items:center;
                 justify-content:space-between;
                 height:51px;
                 background:#535353;
@@ -34,7 +35,8 @@ function NavBar() {
             .logo{
                 padding-left:10px;
                 color:white;
-                font-size:33px;
+                font-size:40px;
+                padding-bottom:8px;
                 
             }
             .logo #Spoti{
@@ -45,13 +47,14 @@ function NavBar() {
             .NavContainer{
                 display:flex;
                 flex-direction: row;
+                align-items:center;
                 justify-content:flex-end;
                 padding-right:10px;
                 
             }
             .NavBarItem{
                 font-size:20px;
-                padding-top:10px;
+                
                 margin-left:16px;
             }
             .NavBarItem a:link, .NavBarItem a:visited{   

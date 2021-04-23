@@ -16,7 +16,7 @@ export default function RankingChart(props) {
     const elements = props.rankElements.map(function(element){
         return (<div className="RankElement">
                     <div className ="RankNumber">{element.rank}</div>
-                    <img src={element.image}/>
+                    <img src={element.image} alt="ALBUM COVER"/>
                     <div className="RankElementInfo">
                         <div className="RankElementTitle">{element.title}</div>
                         <div className="RankElementArtist">{element.artist}</div>
