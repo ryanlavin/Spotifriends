@@ -17,19 +17,30 @@ public class SessionManager extends Thread {
 
     @Override
     public void run() {
+        int sessionMax = 1200;
         while (true) {
-            System.out.print("run.");
+            // CHECK IF THERE ARE ANY LOGGED IN USERS
             if (queue.users.size() == 0) {
-                Thread.yield();
+                try {
+                    Thread.sleep(5000);
+                } catch (InterruptedException e) {
+                    continue;
+                }
                 continue;
             }
+            // CHECK IF FIRST USERS SESSION HAS EXPIRED
             LoggedInUser firstUser = queue.users.get(0);
-            boolean elapsed = Duration.between(Instant.now(), firstUser.start).getSeconds() > 1200;
-            if (!elapsed) {
-                Thread.yield();
+            long difference = Instant.now().getEpochSecond() - firstUser.start.getEpochSecond();
+            boolean expired = difference > sessionMax;
+            if (!expired) {
+                try {
+                    Thread.sleep((sessionMax-difference)*1000);
+                } catch (InterruptedException e) {
+                    continue;
+                }
                 continue;
             }
-            queue.users.removeFirst();
+            queue.removeFirst(firstUser.username);
         }
     }
 

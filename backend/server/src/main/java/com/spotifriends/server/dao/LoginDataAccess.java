@@ -22,8 +22,8 @@ public class LoginDataAccess implements LoginDao {
     public LoginDataAccess(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
         this.queue = new LoggedInQueue();
-        this.manager = new SessionManager(this.queue);
-
+//        this.manager = new SessionManager(this.queue);
+//        this.manager.run();
     }
 
 
