@@ -24,7 +24,8 @@ public class ProfileDataAccess implements ProfileDao {
     public ProfileDataAccess(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
         this.queue = new LoggedInQueue();
-        this.manager = new SessionManager(this.queue);
+//        this.manager = new SessionManager(this.queue);
+//        this.manager.run();
     }
 
     @Override

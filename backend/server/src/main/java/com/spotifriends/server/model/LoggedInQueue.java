@@ -3,18 +3,22 @@ package com.spotifriends.server.model;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 public class LoggedInQueue {
 
     public static LinkedList<LoggedInUser> users;
     public static SessionManager manager;
+    public static Executor executor;
 
     public LoggedInQueue() {
         if (this.users == null) {
             System.out.println("NEW QUEUE CREATED!!!");
             this.users = new LinkedList<LoggedInUser>();
-//            this.manager = new SessionManager(this);
-//            this.manager.run();
+            this.executor = Executors.newSingleThreadExecutor();
+            this.manager = new SessionManager(this);
+            executor.execute(this.manager);
         }
     }
 

@@ -22,7 +22,8 @@ public class MatchingDataAccess implements MatchingDao {
     public MatchingDataAccess(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
         this.queue = new LoggedInQueue();
-        this.manager = new SessionManager(this.queue);
+//        this.manager = new SessionManager(this.queue);
+//        this.manager.run();
     }
 
 
