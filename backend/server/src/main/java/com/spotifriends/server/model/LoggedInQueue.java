@@ -27,5 +27,12 @@ public class LoggedInQueue {
         return "INVALID";
     }
 
-
+    public synchronized void removeFirst(String username) {
+        if (users.size() == 0) return;
+        if (users.get(0).username.equals(username)) {
+            users.removeFirst();
+            System.out.println("LOGIN SESSION EXPIRED FOR: " + username);
+        }
+    }
 }
+

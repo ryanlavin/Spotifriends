@@ -29,7 +29,7 @@ public class SessionManager extends Thread {
                 Thread.yield();
                 continue;
             }
-            queue.users.removeFirst();
+            queue.removeFirst(firstUser.username);
         }
     }
 
