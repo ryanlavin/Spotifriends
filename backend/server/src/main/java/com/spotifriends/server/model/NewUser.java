@@ -28,17 +28,14 @@ public class NewUser {
         this.accessCode = accessCode;
         this.username = username;
         this.password = password;
-        this.token = "BQBXg2PQhqCd-NeZcmm-2xNZoyvUETlYGdTXzNUqOmjBr8u4ctiUxcetHz2qLfdwqda6F6z8DMvNsTo57MIIuZbX4P2d_P5X-lk8tkucGOtm9bw-d6IVHjja13flNAugNore5sgdSx5k4vG_GnPBHYOugD7MTAXhuZ5KSM-L5jy3UNvNLamuSxMEYylif6ZwMH69tY1vMGVZbStFgzMVHy1WTJtIVbkq5EPQI3n3vhjW9WcSM-u1a2yeZ89lSiCtSPu2mJvUooF4dk-AgJIlGw";
-
-
-
+//        this.token = "BQBXg2PQhqCd-NeZcmm-2xNZoyvUETlYGdTXzNUqOmjBr8u4ctiUxcetHz2qLfdwqda6F6z8DMvNsTo57MIIuZbX4P2d_P5X-lk8tkucGOtm9bw-d6IVHjja13flNAugNore5sgdSx5k4vG_GnPBHYOugD7MTAXhuZ5KSM-L5jy3UNvNLamuSxMEYylif6ZwMH69tY1vMGVZbStFgzMVHy1WTJtIVbkq5EPQI3n3vhjW9WcSM-u1a2yeZ89lSiCtSPu2mJvUooF4dk-AgJIlGw";
     }
 
     public String validate() {
-//        this.getToken();
-//        if (this.token.equals("COULD NOT GET TOKEN")) {
-//            return "COULD NOT GET TOKEN";
-//        }
+        this.getToken();
+        if (this.token.equals("COULD NOT GET TOKEN")) {
+            return "COULD NOT GET TOKEN";
+        }
         this.getTopData("tracks");
         System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
         this.getTopData("artists");
