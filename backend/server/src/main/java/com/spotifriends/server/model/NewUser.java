@@ -17,7 +17,7 @@ public class NewUser {
     public final String accessCode;
     public final String username;
     public final String password;
-    public final String token;
+    public String token;
     public TrackArray trackArray;
     public ArtistArray artistArray;
 
