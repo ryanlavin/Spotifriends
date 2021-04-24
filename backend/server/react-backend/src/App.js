@@ -7,6 +7,7 @@ import Matching from './components/matching';
 import { Route } from 'react-router';
 import Profile from './components/profile';
 import NavBar from './components/NavBar';
+import Authenticate from './components/authenticate'
 
 class App extends React.Component{
     constructor(props) {
@@ -42,6 +43,7 @@ class App extends React.Component{
                 <Route exact path="/login" component={Login}/>
                 <Route exact path="/matching" component={Matching}/>
                 <Route exact path="/profile" component={Profile}/>
+                <Route exact path="/authenticate" component={Authenticate}/>
             </div>
         );
     }
