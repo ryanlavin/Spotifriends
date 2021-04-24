@@ -35,7 +35,7 @@ public class MatchingDataAccess implements MatchingDao {
 
         List<User> f = null;
 
-        String getData = "SELECT friends, private FROM user_table WHERE username = ?";
+        String getData = "SELECT * FROM user_table WHERE username = ?";
         f = jdbcTemplate.query(getData, new Object[]{friend_name}, (rs, rowNum) -> {
             return new User(rs.getString("username"), rs.getString("password"), rs.getArray("artists"), rs.getArray("tracks"), rs.getArray("friends"), rs.getBoolean("private"));
         });

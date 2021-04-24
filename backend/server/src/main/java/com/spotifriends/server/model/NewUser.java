@@ -14,7 +14,7 @@ import java.util.Map;
 
 public class NewUser {
 
-    public final String accessCode;
+    public String accessCode;
     public final String username;
     public final String password;
     public String token;
@@ -25,20 +25,22 @@ public class NewUser {
                     @JsonProperty("username") String username,
                     @JsonProperty("password") String password)
     {
-        this.accessCode = accessCode;
+        this.token = accessCode;
         this.username = username;
         this.password = password;
 //        this.token = "BQBXg2PQhqCd-NeZcmm-2xNZoyvUETlYGdTXzNUqOmjBr8u4ctiUxcetHz2qLfdwqda6F6z8DMvNsTo57MIIuZbX4P2d_P5X-lk8tkucGOtm9bw-d6IVHjja13flNAugNore5sgdSx5k4vG_GnPBHYOugD7MTAXhuZ5KSM-L5jy3UNvNLamuSxMEYylif6ZwMH69tY1vMGVZbStFgzMVHy1WTJtIVbkq5EPQI3n3vhjW9WcSM-u1a2yeZ89lSiCtSPu2mJvUooF4dk-AgJIlGw";
     }
 
     public String validate() {
-        this.getToken();
-        if (this.token.equals("COULD NOT GET TOKEN")) {
-            return "COULD NOT GET TOKEN";
-        }
+//        String tokenResult = this.getToken();
+//        if (tokenResult.equals("COULD NOT GET TOKEN")) {
+//            return "COULD NOT GET TOKEN";
+//        }
         this.getTopData("tracks");
-        System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+//        System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
         this.getTopData("artists");
+//        System.out.println("NUM TRACKS" + trackArray.size());
+//        System.out.println("NUM ARTISTS" + artistArray.size());
         return "GOT TOKEN";
     }
 
@@ -94,7 +96,7 @@ public class NewUser {
                 float closePrice = -1;
                 String line;
                 while ((line = in.readLine()) != null) {
-                    System.out.println(line);
+//                    System.out.println(line);
                 }
     //            String empty = in.readLine();
     //            String inputLine = in.readLine();
@@ -106,7 +108,7 @@ public class NewUser {
     //            return closePrice;
                 return "GOT TOKEN";
             } else {
-                System.out.println("GET request failed in Server. Either an invalid date or ticker was present.");
+                System.out.println("GET request failed in Server.");
                 return "COULD NOT GET TOKEN";
             }
         } catch (ProtocolException e) {
@@ -140,7 +142,7 @@ public class NewUser {
                         con.getInputStream()));
                 String line;
                 while ((line = in.readLine()) != null) {
-                    System.out.println(line);
+//                    System.out.println(line);
                     js += line;
                 }
                 in.close();
@@ -149,10 +151,10 @@ public class NewUser {
 
                 if (tracks_or_artists == "tracks") {
                     this.trackArray = gson.fromJson(js, TrackArray.class);
-                    System.out.println(this.trackArray);
+//                    System.out.println(this.trackArray);
                 } else {
                     this.artistArray = gson.fromJson(js, ArtistArray.class);
-                    System.out.println(this.artistArray);
+//                    System.out.println(this.artistArray);
                 }
             } else {
                 System.out.println(responseCode);

@@ -24,7 +24,7 @@ public class StatsDataAccess implements StatsDao {
     @Override
     public String getArtists() {
 
-        String getArtists = "SELECT * FROM artist_table ORDER BY num_references LIMIT 5;";
+        String getArtists = "SELECT * FROM artist_table ORDER BY num_references DESC LIMIT 5;";
         List<qArtist> artistsList = jdbcTemplate.query(getArtists, (rs, rowNum) -> {
             return new qArtist(rs.getString("id"), rs.getString("name"), rs.getInt("popularity"), rs.getInt("num_references"), rs.getArray("genres"), rs.getArray("images"));
         });
@@ -39,7 +39,7 @@ public class StatsDataAccess implements StatsDao {
 
     @Override
     public String getTracks() {
-        String getTracks = "SELECT * FROM track_table ORDER BY num_references LIMIT 5;";
+        String getTracks = "SELECT * FROM track_table ORDER BY num_references DESC LIMIT 5;";
         List<qTrack> tracksList = jdbcTemplate.query(getTracks, (rs, rowNum) -> {
             return new qTrack(rs.getString("id"), rs.getString("name"), rs.getInt("popularity"), rs.getInt("num_references"));
         });
