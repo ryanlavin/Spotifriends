@@ -1,6 +1,6 @@
 import React from "react";
 import RankingChart from "./rankingChart"
-
+import {SpotifyAuthListener} from "react-spotify-auth";
 function Dashboard(props) {
     //props.topSongs, props.topArtists
     //array for testing;
@@ -19,6 +19,7 @@ function Dashboard(props) {
         }
     ];
     return (
+        
         <div className="container">
         <div className="StatsContainer">
                 <div className="StatsDisplay" id="TopSongs">

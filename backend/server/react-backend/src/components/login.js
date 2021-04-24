@@ -3,6 +3,9 @@ import "../css/login.css";
 import FormInput from "./input-component";
 //import '../css/login.css';
 import axios from 'axios';
+import {Link} from "react-router-dom";
+import {SpotifyAuth, Scopes} from 'react-spotify-auth';
+import 'react-spotify-auth/dist/index.css';
 
 class Login extends React.Component {
     constructor(props) {
@@ -11,7 +14,8 @@ class Login extends React.Component {
             loginUsername: "",
             loginPassword: "",
             registerUsername: "",
-            registerPassword: ""
+            registerPassword: "",
+            access_token:""
         };
     }
 
@@ -41,6 +45,14 @@ class Login extends React.Component {
         );
         this.setState({registerUsername: "", registerPassword: ""});
     };
+    handleAccessToken = (token) => {
+        /* this.setState({
+            access_token: token
+        },()=>{
+            console.log("ACCESS TOKEN:" + this.state.access_token);
+        }); */
+        window.accessToken=token;
+    }
     render() {
         return (
             <div className="sign-in">
@@ -96,7 +108,18 @@ class Login extends React.Component {
                                     // label="password"
                                     required
                                 />
+                                {/* <Link to ="/authenticate">
                                 <button id="login-button" type="submit">Connect to Spotify</button>
+                                </Link> */}
+                                <div id="button-container">
+                                    <SpotifyAuth 
+                                        id="login-button"
+                                        redirectUri='http://localhost:3000/authenticate'
+                                        clientID='35a2f5b326314bf381975f4e5d4dcc1e'
+                                        scopes={[Scopes.userReadPrivate, Scopes.userReadEmail]}
+                                        onAccessToken={this.handleAccessToken}
+                                    />
+                                </div>
                             </form>
                         </React.Fragment>
                     </div>
