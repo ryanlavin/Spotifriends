@@ -116,7 +116,7 @@ class Login extends React.Component {
                                         id="login-button"
                                         redirectUri='http://localhost:3000/authenticate'
                                         clientID='35a2f5b326314bf381975f4e5d4dcc1e'
-                                        scopes={[Scopes.userReadPrivate, Scopes.userReadEmail]}
+                                        scopes={[Scopes.userReadPrivate, Scopes.userReadEmail, Scopes.userTopRead]}
                                         onAccessToken={this.handleAccessToken}
                                     />
                                 </div>

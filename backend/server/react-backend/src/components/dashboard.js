@@ -21,6 +21,9 @@ function Dashboard(props) {
     return (
         
         <div className="container">
+        <script>
+            {console.log(window.accessToken)}
+        </script>
         <div className="StatsContainer">
                 <div className="StatsDisplay" id="TopSongs">
                     <div className="StatsTitle" id="TopSongs">
