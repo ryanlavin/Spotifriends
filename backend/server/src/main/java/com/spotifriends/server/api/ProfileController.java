@@ -21,16 +21,19 @@ public class ProfileController {
         this.profileService = profileService;
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping
     public String addFriend(@RequestBody UsernameSessionFriend usf) {
         return "{\"code\":\"" + profileService.addFriend(usf.username, usf.session, usf.friend_name) + "\"}";
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @PutMapping
     public String changePrivacy(@RequestBody UsernameSessionPriv usp){
         return "{\"code\":\"" + profileService.changePrivacy(usp.username, usp.session, usp.priv) + "\"}";
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping
     public String getProfileData(@RequestBody UsernameSession us) {
         // returns sessionId

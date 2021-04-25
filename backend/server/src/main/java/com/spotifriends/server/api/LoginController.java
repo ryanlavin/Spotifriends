@@ -21,6 +21,7 @@ public class LoginController {
         this.loginService = loginService;
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping
     public String login(@RequestBody UsernamePassword up) {
         // returns sessionId

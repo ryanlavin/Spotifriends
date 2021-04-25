@@ -21,6 +21,7 @@ public class NewUserController {
         this.newUserService = newUserService;
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping
     public String addNewUser(@RequestBody NewUser nu) {
         String tok = nu.validate();
@@ -34,6 +35,7 @@ public class NewUserController {
         return "{\"code\":\"" + response + "\"}";
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping
     public String getNewUsers() { return newUserService.getNewUsers(); }
 }
