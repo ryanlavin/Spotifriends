@@ -1,5 +1,7 @@
 import React from "react";
 import RankingChart from "./rankingChart"
+import axios from "axios";
+import { AxiosProvider, Request, Get, Delete, Head, Post, Put, Patch, withAxios } from 'react-axios';
 import {SpotifyAuthListener} from "react-spotify-auth";
 function Dashboard(props) {
     //props.topSongs, props.topArtists
@@ -18,12 +20,50 @@ function Dashboard(props) {
             artist:"Playboi Carti"  
         }
     ];
+    function getTest(){
+        console.log("HERE!");
+        axios({
+            method:'get',
+            url:'https://cors-anywhere.herokuapp.com/http://localhost:8080/dashboard-api',
+            headers:{
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept'
+            },
+            timeout:5000,
+        })
+        .then((response) => {
+            console.log(response);
+        })
+        .catch((error)=>{
+            console.log(error);
+        })
+    }
     return (
         
         <div className="container">
         <script>
-            {console.log(window.accessToken)}
+        {
+            //console.log(window.accessToken);
+            getTest()
+        }
         </script>
+        {/* <Request
+            instance = {axios.create({
+                
+                timeout:5000,
+                
+                
+            })}
+            url='/dashboard-api'
+            method='GET'
+            onSuccess= {function(response){
+                console.log(response.data)
+            }}
+            onError={function(error){
+                console.log("error");
+            }}
+
+        /> */}
         <div className="StatsContainer">
                 <div className="StatsDisplay" id="TopSongs">
                     <div className="StatsTitle" id="TopSongs">
