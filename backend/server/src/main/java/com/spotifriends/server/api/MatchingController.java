@@ -23,6 +23,7 @@ public class MatchingController {
         this.matchingService = matchingService;
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping
     public String getMatch(@RequestBody UsernameSessionFriend upf) {
         // returns sessionId

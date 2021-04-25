@@ -19,11 +19,7 @@ public class StatsController {
         this.statsService = StatsService;
     }
 
-//    @PostMapping
-//    public void addNewUser(@RequestBody NewUser nu) {
-//        newUserService.addNewUser(nu);
-//    }
-
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping
     public String getStats() {
         return statsService.getStats();
