@@ -25,8 +25,9 @@ class Profile extends Component {
         axios.put("http://localhost:8080/profile-api",{
             username: Cookies.get('uname'),
             session: Cookies.get('sessionID'),
-            priv: checked
+            priv: true
         }).then((response)=>{
+            console.log(response);
             alert("Changed successfully");
             
         })

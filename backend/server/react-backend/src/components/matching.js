@@ -41,8 +41,8 @@ export default class Matching extends Component{
         super(props);
         
         this.state = {
-            uName: "",
-            uName2:"",
+            uName: Cookies.get('uname'),
+            uName2: "",
             results:<div></div>,
             readyToMatch:false,
             showButton:false
@@ -90,8 +90,8 @@ export default class Matching extends Component{
     }
     handleChange = (event) => {
         const {value} = event.target;
-        this.setState({ uName: value },()=>{
-            if(this.state.uName.length>5){
+        this.setState({ uName2: value },()=>{
+            if(this.state.uName2.length>5){
                 this.setState({showButton:true})
 
             }
@@ -115,7 +115,7 @@ export default class Matching extends Component{
                     <div className="AddToWhitelist">
                             <input
                                 type="text"
-                                value={this.state.uName}   
+                                value={this.state.uName2}   
                                 type="text"
                                 name="EnterUser"
                                 placeholder="Username"
@@ -131,15 +131,24 @@ export default class Matching extends Component{
                                             timeout:5000,
                                         })}
                                         url="/matching-api"
-                                        method='get'
+                                        method='post'
+                                        data ={
+                                            {
+                                                username:Cookies.get('uname'),
+                                                session:Cookies.get('sessionID'),
+                                                friend_name:this.state.uName2
+                                            }
+                                        }
                                         onSuccess={(response)=>{
+                                            console.log(this.state.uName2);
                                             this.setResults(
                                                 <div className="ResultContainer">
                                                     Matching Score: {response.data.score}
                                                     <style jsx>{`
                                                         .ResultContainer {
-                                                            font-size:35;
+                                                            font-size:35px;
                                                             text-align: center;
+                                                            padding-top:10px;
                                                         }
                                                     `}
                                                     </style>
@@ -153,7 +162,9 @@ export default class Matching extends Component{
                                 
                                 
                             :<div></div>}
+                            
                     </div>
+                    {this.state.results}
                 </div>
                 <style jsx>{`
                         .container {

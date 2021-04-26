@@ -46,11 +46,12 @@ function Dashboard(props) {
         
         <div className="container">
         <script>
-        {
-            //console.log(Cookies.get('sessionID'))
-            //console.log(window.accessToken);
-            //getTest()
-        }
+        
+            {console.log(Cookies.get('sessionID'))}
+            
+            {/* //console.log(window.accessToken);
+            //getTest() */}
+            {console.log(Cookies.get('uname'))}
         </script>
         {/* <Request
             instance = {axios.create({

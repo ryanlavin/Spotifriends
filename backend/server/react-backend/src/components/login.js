@@ -3,7 +3,7 @@ import "../css/login.css";
 import FormInput from "./input-component";
 //import '../css/login.css';
 import axios from 'axios';
-import {Link} from "react-router-dom";
+import {Redirect, Link} from "react-router-dom";
 import {SpotifyAuth, Scopes} from 'react-spotify-auth';
 import 'react-spotify-auth/dist/index.css';
 import Cookies from 'js-cookie';
@@ -44,7 +44,8 @@ class Login extends React.Component {
             loginPassword: "",
             registerUsername: "",
             registerPassword: "",
-            access_token:""
+            access_token:"",
+            loggedIn:false,
         };
     }
 
@@ -57,12 +58,19 @@ class Login extends React.Component {
     }
     handleLogin = (event) => {
         event.preventDefault();
-        axios.post("https:localhost:8080/login-api",
+        axios.post("http://localhost:8080/login-api",
             {
-                "username": this.state.loginUsername,
-                "password": this.state.loginPassword
-            });
-        this.setState({ loginUsername: "", loginPassword: "" });
+                username: Cookies.get('uname'),
+                password: Cookies.get('pw')
+            }).then((response) => {
+                console.log(response);
+                Cookies.set('sessionID', response.data.session);
+                this.setState({ loginUsername: "", loginPassword: "",loggedIn:true });
+            }).then((error) => {
+                console.log(error);
+            })
+        
+        
     };
 
     handleChange = (event) => {
@@ -82,10 +90,22 @@ class Login extends React.Component {
             }
         });
     };
+    handleLoginChange = (event) => {
+        const { value, name } = event.target;
 
+        this.setState({ [name]: value },()=>{
+            if(this.state.loginUsername.length>5
+            && this.state.loginPassword.length>5){
+                Cookies.set('uname',this.state.loginUsername);
+                Cookies.set('pw',this.state.loginPassword);
+                console.log("uname cookie:" + Cookies.get('uname') + "  pw cookie:" + Cookies.get('pw')  );
+
+            }
+        });
+    };
     handleRegister = (event) => {
         event.preventDefault();
-        axios.post("https:localhost:8080/register-api",
+        axios.post("http://localhost:8080/register-api",
         {
             username: this.state.registerUsername,
             password: this.state.registerPassword,
@@ -101,21 +121,27 @@ class Login extends React.Component {
         }); */
         window.accessToken=token;
     }
+    redirect(){
+        if(this.state.loggedIn){
+            return <Redirect push to="/dashboard"/>
+        }
+    }
     render() {
         return (
             <div className="sign-in">
+                {this.redirect()}
                 <div className="login">
                     <h2 id="login-header">Login</h2>
                     <div id="login-form-div">
                         <React.Fragment>
-                            <form id="login-form" onSubmit={this.handleLogin}>
+                            <form id="login-form" >
                                 <h2 id="username-header">Username</h2>
                                 <FormInput
                                     id="loginUsername"
                                     type="text"
                                     name="loginUsername"
                                     value={this.state.loginUsername}
-                                    handleChange={this.handleChange}
+                                    handleChange={this.handleLoginChange}
                                     required
                                 />
                                 <h2 id="password-header">Password</h2>
@@ -124,10 +150,10 @@ class Login extends React.Component {
                                     type="text"
                                     name="loginPassword"
                                     value={this.state.loginPassword}
-                                    handleChange={this.handleChange}
+                                    handleChange={this.handleLoginChange}
                                     required
                                 />
-                                <button id="login-button" type="submit">Login</button>
+                                <button id="login-button" type="submit" onClick={this.handleLogin}>Login</button>
                             </form>
                         </React.Fragment>
                     </div>

@@ -3,6 +3,7 @@ import axios from "axios";
 import { AxiosProvider, Request, Get, Delete, Head, Post, Put, Patch, withAxios } from 'react-axios';
 import {getData, getPreview} from 'spotify-url-info';
 import Cookies from 'js-cookie';
+import {Redirect} from 'react-router-dom';
 //import {spotify} from 'spotify-cover-art-api';
 //rankElements -> 
 /* 
@@ -39,8 +40,15 @@ export default class RankingChart extends Component{
     setTracks(t){
         this.setState({tracks:t});
     };
+    checkAccessToken(){
+        if(Cookies.get('spotifyAuthToken') == undefined 
+        && Cookies.get('sessionID') != undefined){
+            return <Redirect to="/reauthorize"/>
+        }
+    }
     render(){return (
         <div className="RankingChart">
+            {this.checkAccessToken()}
             <Request
             instance = {axios.create({
                 baseURL:'http://localhost:8080/',
@@ -99,6 +107,8 @@ export default class RankingChart extends Component{
                         )
                     })
                     this.setTracks(t);
+                }).then((error)=>{
+                    console.log(error);
                 })}
                 else{
                     var t = tracks.map(function(element){
