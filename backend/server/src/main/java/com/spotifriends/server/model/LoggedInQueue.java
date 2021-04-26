@@ -22,10 +22,12 @@ public class LoggedInQueue {
         }
     }
 
-    public synchronized String getUser(String username) {
+    public synchronized String getUser(String username, String session) {
         for (LoggedInUser u : users) {
             if (u.username.equals(username)) {
-                return u.session;
+                if (u.session.equals(session)) {
+                    return u.session;
+                }
             }
         }
         return "INVALID";

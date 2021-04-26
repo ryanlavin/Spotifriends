@@ -95,7 +95,7 @@ public class ProfileDataAccess implements ProfileDao {
     }
 
     public boolean validate(String username, String session) {
-        String sessionID = this.queue.getUser(username);
+        String sessionID = this.queue.getUser(username, session);
         if (sessionID.equals("INVALID")) return false;
         if (!sessionID.equals(session)) return false;
         return true;
