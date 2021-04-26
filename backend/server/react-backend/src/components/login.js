@@ -6,6 +6,7 @@ import axios from 'axios';
 import {Link} from "react-router-dom";
 import {SpotifyAuth, Scopes} from 'react-spotify-auth';
 import 'react-spotify-auth/dist/index.css';
+import Cookies from 'js-cookie';
 
 const authButton = 
 <>
@@ -70,7 +71,11 @@ class Login extends React.Component {
         this.setState({ [name]: value },()=>{
             if(this.state.registerUsername.length>5
             && this.state.registerPassword.length>5){
+                Cookies.set('uname',this.state.registerUsername);
+                Cookies.set('pw',this.state.registerPassword);
                 this.setState({fieldsFilled:true})
+                console.log("uname cookie:" + Cookies.get('uname') + "  pw cookie:" + Cookies.get('pw')  );
+
             }
             else if(this.state.fieldsFilled){
                 this.setState({fieldsFilled:false})
@@ -82,8 +87,8 @@ class Login extends React.Component {
         event.preventDefault();
         axios.post("https:localhost:8080/register-api",
         {
-            "username": this.state.registerUsername,
-            "password": this.state.registerPassword
+            username: this.state.registerUsername,
+            password: this.state.registerPassword,
         }
         );
         this.setState({registerUsername: "", registerPassword: ""});
