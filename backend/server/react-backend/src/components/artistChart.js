@@ -1,8 +1,7 @@
 import React, {Component} from "react";
 import axios from "axios";
-import { AxiosProvider, Request, Get, Delete, Head, Post, Put, Patch, withAxios } from 'react-axios';
+import {Request} from 'react-axios';
 import {getData, getPreview} from 'spotify-url-info';
-import Cookies from 'js-cookie';
 //import {spotify} from 'spotify-cover-art-api';
 //rankElements -> 
 /* 
@@ -16,21 +15,10 @@ import Cookies from 'js-cookie';
     ]
 */
 
-export default class RankingChart extends Component{
-    /* const elements = props.rankElements.map(function(element){
-        return (<div className="RankElement">
-                    <div className ="RankNumber">{element.rank}</div>
-                    <img src={element.image} alt="ALBUM COVER"/>
-                    <div className="RankElementInfo">
-                        <div className="RankElementTitle">{element.title}</div>
-                        <div className="RankElementArtist">{element.artist}</div>
-                    </div>
-                </div>
-        )
-    }) */
+export default class ArtistChart extends Component{
+ 
     constructor(){
         super();
-        this.artistList = false;
         this.state = {
             tracks: [],
             artists:[],
@@ -52,73 +40,30 @@ export default class RankingChart extends Component{
                 //console.log(response.data.artists);
                 var tracks = [];
                 
-                tracks = response.data.tracks;
-                
+                tracks = response.data.artists;
                 
                 //console.log(tracks);
                 tracks.sort((a,b) => a.popularity < b.popularity ? 1 : -1);
-                //console.log(tracks);
+                console.log(tracks);
                 var index = 0;
-
-                    
-                var idArray = [];
-                for(var i=0;i<tracks.length;i++){
-                    idArray.push(tracks[i].id);
-                }
-                var idstring = idArray.join(',');
-                var cookieToken = Cookies.get('spotifyAuthToken');
-                if(!(cookieToken == undefined)){
-                    axios.get("https://api.spotify.com/v1/tracks",{
-                        headers:{
-                            Authorization: `Bearer ${cookieToken}`
-                        },
-                        params:{
-                            ids: idstring
-                        }
-                        
-                }).then((response)=>{
-                    
-                    console.log(response.data);
                     var t = tracks.map(function(element){
                         index = index + 1;
-                        var match = response.data.tracks.find(track=>
-                            track.id==element.id
-                        );
-                        var artSrc = match.album.images[1].url;
+                        var artSrc = element.images[1];
                         console.log(artSrc);
-                        var artistSrc = match.artists[0].name;
+                        var artistSrc = element.name;
                         return (<div className="RankElement">
                                     <div className ="RankNumber">{index}</div>
                                     <img src={artSrc} alt="ALBUM COVER"/>
                                     <div className="RankElementInfo">
-                                        <div className="RankElementTitle">{element.name}</div>
-                                        <div className="RankElementArtist">{artistSrc}</div>
+                                        <div className="RankElementTitle">{artistSrc}</div>
+                                        <div className="RankElementArtist">{""}</div>
                                     </div>
                                 </div>
                                 
                         )
                     })
                     this.setTracks(t);
-                })}
-                else{
-                    var t = tracks.map(function(element){
-                        index = index + 1;
-                        var artistSrc = "";
-                        return (<div className="RankElement">
-                                    <div className ="RankNumber">{index}</div>
-                                    <img src={""} alt="ALBUM COVER"/>
-                                    <div className="RankElementInfo">
-                                        <div className="RankElementTitle">{element.name}</div>
-                                        <div className="RankElementArtist">{artistSrc}</div>
-                                    </div>
-                                </div>
-                                
-                        )
-                    })
-                    this.setTracks(t);
-                }
-                
-                
+
             }}
             onError={function(error){
                 console.log("error");

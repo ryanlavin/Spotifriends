@@ -33,7 +33,7 @@ public class StatsService {
         String artists = this.getArtists();
         String tracks = this.getTracks();
 
-        return "{ artists: " + artists + ", tracks: " + tracks + "}";
+        return "{ \"artists\": " + artists + ", \"tracks\": " + tracks + "}";
 
     }
 

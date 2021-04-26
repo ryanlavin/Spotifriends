@@ -1,5 +1,6 @@
 import React from "react";
-import RankingChart from "./rankingChart"
+import RankingChart from "./rankingChart";
+import ArtistChart from "./artistChart";
 import axios from "axios";
 import { AxiosProvider, Request, Get, Delete, Head, Post, Put, Patch, withAxios } from 'react-axios';
 import {SpotifyAuthListener} from "react-spotify-auth";
@@ -20,14 +21,15 @@ function Dashboard(props) {
             artist:"Playboi Carti"  
         }
     ];
-    function getTest(){
+
+    /* function getTest(){
         console.log("HERE!");
         axios({
             method:'get',
-            url:'https://cors-anywhere.herokuapp.com/http://localhost:8080/dashboard-api',
+            url:'http://localhost:8080/dashboard-api',
             headers:{
                 'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept'
+                
             },
             timeout:5000,
         })
@@ -37,22 +39,21 @@ function Dashboard(props) {
         .catch((error)=>{
             console.log(error);
         })
-    }
+    } */
+    
     return (
         
         <div className="container">
         <script>
         {
             //console.log(window.accessToken);
-            getTest()
+            //getTest()
         }
         </script>
         {/* <Request
             instance = {axios.create({
-                
+                baseURL:'http://localhost:8080/',
                 timeout:5000,
-                
-                
             })}
             url='/dashboard-api'
             method='GET'
@@ -62,19 +63,19 @@ function Dashboard(props) {
             onError={function(error){
                 console.log("error");
             }}
-
         /> */}
         <div className="StatsContainer">
                 <div className="StatsDisplay" id="TopSongs">
                     <div className="StatsTitle" id="TopSongs">
                         Top Songs
                     </div>
-                    <RankingChart rankElements={songs}/>
+                    <RankingChart/>
                 </div>
                 <div className="StatsDisplay" id="TopArtists">
                 <div className="StatsTitle" id="TopArtists">
                         Top Artists
                     </div>
+                    <ArtistChart/>
                 </div>
             </div>
             <style jsx>{`

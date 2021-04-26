@@ -35,8 +35,7 @@ const dummyButton =
 class Login extends React.Component {
     constructor(props) {
         super(props);
-        this.uNameRef=React.createRef();
-        this.pwRef=React.createRef();
+
         
         this.state = {
             fieldsFilled: false,
