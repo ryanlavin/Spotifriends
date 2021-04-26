@@ -8,6 +8,8 @@ import com.spotifriends.server.service.ProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RequestMapping("/profile-api")
 @RestController
 public class ProfileController {
@@ -35,9 +37,9 @@ public class ProfileController {
 
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping
-    public String getProfileData(@RequestBody UsernameSession us) {
+    public String getProfileData(@RequestHeader Map<String, String> headers) {
         // returns sessionId
-        return profileService.getProfileData(us.username, us.session);
+        return profileService.getProfileData(headers.get("username"), headers.get("session"));
     }
 
 }

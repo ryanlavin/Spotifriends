@@ -46,26 +46,29 @@ class Profile extends Component {
                         instance={axios.create({
                             baseURL:'http://localhost:8080/',
                             timeout:5000,
+                            headers: {
+                                'username':Cookies.get('uname'),
+                                'session':Cookies.get('sessionID')
+                            }
                         })}
                         url="/profile-api"
                         method='get'
-                        data={
-                            {
-                                username:Cookies.get('uname'),
-                                session:Cookies.get('sessionID')
-                            }
-                        }
+                        /* params={
+                            `"username":"${Cookies.get('uname')}","session":"${Cookies.get('sessionID')}"`
+                        } */
+                        /* data={
+                            username:Cookies.get('uname'),
+
+                        } */
                         onSuccess={(response)=>{
                             console.log(response);
-                            this.setResults(
-                                <ul className="WhitlistedUsersList">
-                                    
-                                </ul>
-                            );
+                                /* this.setResults(
+                                    <ul className="WhitlistedUsersList">
+                                        
+                                    </ul>
+                                ); */
                         }}
                         onError={(error)=>{
-                            console.log(Cookies.get('uname'));
-                            console.log(Cookies.get('sessionID'));
                             console.log(error);
                         }}
                     />
