@@ -17,7 +17,7 @@ public class SessionManager extends Thread {
 
     @Override
     public void run() {
-        int sessionMax = 1200;
+        int sessionMax = 1800;
         while (true) {
             // CHECK IF THERE ARE ANY LOGGED IN USERS
             if (queue.users.size() == 0) {
