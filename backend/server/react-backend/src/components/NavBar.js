@@ -1,9 +1,11 @@
-import React from 'react';
+import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
 import "../css/NavBar.css";
+import Cookies from 'js-cookie';
 
-function NavBar() {
-    return (
+export default class NavBar extends Component{
+    render(){
+        return (
             <div className="topBar">
             <div className="logo">
                 <text id="Spoti">Spoti</text>
@@ -71,7 +73,7 @@ function NavBar() {
         </style>
         </div>
         
-    )
+    )}
 }
 
-export default NavBar;
+//export default NavBar;
