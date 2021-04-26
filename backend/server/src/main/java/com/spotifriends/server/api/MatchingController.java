@@ -24,7 +24,7 @@ public class MatchingController {
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
-    @GetMapping
+    @PostMapping
     public String getMatch(@RequestBody UsernameSessionFriend upf) {
         // returns sessionId
         return "{ \"score\": \"" + matchingService.getMatch(upf.username, upf.session, upf.friend_name) + "\"}";
