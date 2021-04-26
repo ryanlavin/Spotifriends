@@ -18,7 +18,18 @@ export default function Authenticate(){
         }
         ).then((response) => {
             console.log(response);
-            history.push("/dashboard");
+            axios.post("http://localhost:8080/login-api",{
+                username: Cookies.get('uname'),
+                password: Cookies.get('pw'),
+            }).then((response)=>{
+                var in30Minutes = 1/48;
+                Cookies.set('sessionID',response.data.session,{
+                    expires: in30Minutes
+                });
+                //console.log(Cookies.get('sessionID'));
+                //console.log(response.data.session);
+                history.push("/dashboard");
+            })
         });
 
         //console.log("ACCESS TOKEN @ AUTHENTICATE: " + window.accessToken);

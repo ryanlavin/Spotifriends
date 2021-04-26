@@ -4,6 +4,7 @@ import ArtistChart from "./artistChart";
 import axios from "axios";
 import { AxiosProvider, Request, Get, Delete, Head, Post, Put, Patch, withAxios } from 'react-axios';
 import {SpotifyAuthListener} from "react-spotify-auth";
+import Cookies from 'js-cookie';
 function Dashboard(props) {
     //props.topSongs, props.topArtists
     //array for testing;
@@ -46,6 +47,7 @@ function Dashboard(props) {
         <div className="container">
         <script>
         {
+            //console.log(Cookies.get('sessionID'))
             //console.log(window.accessToken);
             //getTest()
         }
