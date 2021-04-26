@@ -4,6 +4,7 @@ import "../css/NavBar.css";
 import Cookies from 'js-cookie';
 
 export default class NavBar extends Component{
+    
     render(){
         return (
             <div className="topBar">

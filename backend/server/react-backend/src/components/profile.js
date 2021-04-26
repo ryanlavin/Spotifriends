@@ -1,6 +1,9 @@
 import React, {Component} from "react";
 import Switch from "react-switch";
-
+import Cookies from 'js-cookie';
+import {Redirect} from 'react-router-dom';
+import axios from 'axios';
+import { AxiosProvider, Request, Get, Delete, Head, Post, Put, Patch, withAxios } from 'react-axios';
 class Profile extends Component {
     constructor(){
         super();
@@ -10,7 +13,21 @@ class Profile extends Component {
     handleChange(checked){
         this.setState({checked});
     }
+    /* handleClick(){
+        axios.post("http://localhost:8080/profile-api",{
+            username: Cookies.get('uname'),
+            session: Cookies.get('sessionID')
+        }).then((response)=>{
+            if(response.data.code != undefined && response.data.code == "SUCCESS"){
+                alert("Added successfully");
+            }
+        })
+    } */
     render(){
+        if(Cookies.get('sessionID') == undefined){
+            return <Redirect push to="/login"/>
+        }
+        else{
         return (
             <div className="container">
                 <div className="ProfileCard">
@@ -25,11 +42,52 @@ class Profile extends Component {
                     {/* WHITELISTED USERS */}
                     <h1 className = "WhitelistedUsersTitle">Whitelisted Users</h1>
                     {/* DISPLAY WHITELISTED USERS */}
-
+                    <Request
+                        instance={axios.create({
+                            baseURL:'http://localhost:8080/',
+                            timeout:5000,
+                        })}
+                        url="/profile-api"
+                        method='get'
+                        data={
+                            {
+                                username:Cookies.get('uname'),
+                                session:Cookies.get('sessionID')
+                            }
+                        }
+                        onSuccess={(response)=>{
+                            console.log(response);
+                            this.setResults(
+                                <ul className="WhitlistedUsersList">
+                                    
+                                </ul>
+                            );
+                        }}
+                        onError={(error)=>{
+                            console.log(Cookies.get('uname'));
+                            console.log(Cookies.get('sessionID'));
+                            console.log(error);
+                        }}
+                    />
                     {/* ADD USER */}
                     <div className="AddToWhitelist">
                         <input type="text" name="EnterUser" placeholder="Username"/>
-                        <button>Add User</button>
+                        <button onClick={ ()=>{
+                            axios.post("http://localhost:8080/profile-api",{
+                                username: Cookies.get('uname'),
+                                session: Cookies.get('sessionID')
+                            }).then((response)=>{
+                                if(response.data.code != undefined && response.data.code == "SUCCESS"){
+                                    alert("Added successfully");
+                                }
+                            })
+                        }
+
+                        }
+                            
+                            
+                        
+                        >Add User</button>
                     </div>
                     
                 </div>
@@ -104,6 +162,7 @@ class Profile extends Component {
                 </style>
             </div>
         );
+        }
     }
 }
 
