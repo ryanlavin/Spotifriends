@@ -1,5 +1,8 @@
 import React from "react";
-import RankingChart from "./rankingChart"
+import RankingChart from "./rankingChart";
+import ArtistChart from "./artistChart";
+import axios from "axios";
+import { AxiosProvider, Request, Get, Delete, Head, Post, Put, Patch, withAxios } from 'react-axios';
 import {SpotifyAuthListener} from "react-spotify-auth";
 function Dashboard(props) {
     //props.topSongs, props.topArtists
@@ -18,23 +21,61 @@ function Dashboard(props) {
             artist:"Playboi Carti"  
         }
     ];
+
+    /* function getTest(){
+        console.log("HERE!");
+        axios({
+            method:'get',
+            url:'http://localhost:8080/dashboard-api',
+            headers:{
+                'Access-Control-Allow-Origin': '*',
+                
+            },
+            timeout:5000,
+        })
+        .then((response) => {
+            console.log(response);
+        })
+        .catch((error)=>{
+            console.log(error);
+        })
+    } */
+    
     return (
         
         <div className="container">
         <script>
-            {console.log(window.accessToken)}
+        {
+            //console.log(window.accessToken);
+            //getTest()
+        }
         </script>
+        {/* <Request
+            instance = {axios.create({
+                baseURL:'http://localhost:8080/',
+                timeout:5000,
+            })}
+            url='/dashboard-api'
+            method='GET'
+            onSuccess= {function(response){
+                console.log(response.data)
+            }}
+            onError={function(error){
+                console.log("error");
+            }}
+        /> */}
         <div className="StatsContainer">
                 <div className="StatsDisplay" id="TopSongs">
                     <div className="StatsTitle" id="TopSongs">
                         Top Songs
                     </div>
-                    <RankingChart rankElements={songs}/>
+                    <RankingChart/>
                 </div>
                 <div className="StatsDisplay" id="TopArtists">
                 <div className="StatsTitle" id="TopArtists">
                         Top Artists
                     </div>
+                    <ArtistChart/>
                 </div>
             </div>
             <style jsx>{`
