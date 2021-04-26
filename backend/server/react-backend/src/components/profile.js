@@ -7,12 +7,47 @@ import { AxiosProvider, Request, Get, Delete, Head, Post, Put, Patch, withAxios 
 class Profile extends Component {
     constructor(){
         super();
-        this.state = {checked:false};
-        this.handleChange=this.handleChange.bind(this);
+        this.state = {
+            checked:false,
+            friends:[],
+            whiteListReady:false,
+            whiteList:<div className="friend"> friendfriend</div>,
+            addFriendVal:"",
+        };
+        this.handleChecked = this.handleChecked.bind(this);
+        this.setWhitelist = this.setWhitelist.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        this.handleClick = this.handleClick.bind(this);
+
     }
-    handleChange(checked){
+    handleChecked = (checked)=>{
         this.setState({checked});
+        axios.put("http://localhost:8080/profile-api",{
+            username: Cookies.get('uname'),
+            session: Cookies.get('sessionID'),
+            priv: checked
+        }).then((response)=>{
+            alert("Changed successfully");
+            
+        })
     }
+    setWhitelist = (wl)=>{
+        console.log(wl);
+        if(wl != undefined){
+            this.setState({friends:wl,
+                whiteListReady:true,
+                whiteList:
+
+                    <div className="friend">{wl}</div>
+
+            });
+        }
+    }
+    handleChange = (event) => {
+        const {value} = event.target;
+        this.setState({ addFriendVal: value },()=>{
+        });
+    };
     /* handleClick(){
         axios.post("http://localhost:8080/profile-api",{
             username: Cookies.get('uname'),
@@ -23,6 +58,17 @@ class Profile extends Component {
             }
         })
     } */
+    handleClick = ()=>{
+        axios.post("http://localhost:8080/profile-api",{
+            username: Cookies.get('uname'),
+            session: Cookies.get('sessionID'),
+            friend_name: this.state.addFriendVal
+        }).then((response)=>{
+            if(response.data.code != undefined && response.data.code == "SUCCESS"){
+                alert("Added successfully");
+            }
+        })
+    }
     render(){
         if(Cookies.get('sessionID') == undefined){
             return <Redirect push to="/login"/>
@@ -33,14 +79,14 @@ class Profile extends Component {
                 <div className="ProfileCard">
                 {/* profile card is outer box and column */}
                     <div className="ProfileTitle">Profile</div>
-                    <label class="SettingLabel">
+                    <label className="SettingLabel">
                         <span>Private</span>
-                             <Switch onChange={this.handleChange} checked={this.state.checked}
+                             <Switch onChange={this.handleChecked} checked={this.state.checked}
                             onColor="#1bd31b" uncheckedIcon={false} height={24} width={50}/>
                             {/* <input type="checkbox" name="PrivateToggle" id="PrivateToggle"/> */}
                     </label>
                     {/* WHITELISTED USERS */}
-                    <h1 className = "WhitelistedUsersTitle">Whitelisted Users</h1>
+                    {/* <h1 className = "WhitelistedUsersTitle">Whitelisted Users</h1> */}
                     {/* DISPLAY WHITELISTED USERS */}
                     <Request
                         instance={axios.create({
@@ -53,44 +99,37 @@ class Profile extends Component {
                         })}
                         url="/profile-api"
                         method='get'
-                        /* params={
-                            `"username":"${Cookies.get('uname')}","session":"${Cookies.get('sessionID')}"`
-                        } */
-                        /* data={
-                            username:Cookies.get('uname'),
-
-                        } */
-                        onSuccess={(response)=>{
+                        onSuccess={(response)=>this.setWhitelist(response.data)/* {
+                            var friends =  response.data.friends;
                             console.log(response);
-                                /* this.setResults(
-                                    <ul className="WhitlistedUsersList">
-                                        
-                                    </ul>
-                                ); */
-                        }}
+                            return (
+                                <div className="WhitelistedUsersList">
+                                    {
+                                        friends.map(function(friend){
+                                            return <div className="friend">{friend}</div>
+                                        })
+                                    }
+                                    <div className="friend">testtesttest</div>
+
+                                </div>
+                            )
+                        } */}
                         onError={(error)=>{
                             console.log(error);
                         }}
                     />
+                    {/* {this.state.whiteList} */}
                     {/* ADD USER */}
                     <div className="AddToWhitelist">
-                        <input type="text" name="EnterUser" placeholder="Username"/>
-                        <button onClick={ ()=>{
-                            axios.post("http://localhost:8080/profile-api",{
-                                username: Cookies.get('uname'),
-                                session: Cookies.get('sessionID')
-                            }).then((response)=>{
-                                if(response.data.code != undefined && response.data.code == "SUCCESS"){
-                                    alert("Added successfully");
-                                }
-                            })
-                        }
-
-                        }
-                            
-                            
-                        
-                        >Add User</button>
+                    {/* <input
+                            type="text"
+                            value={this.state.addFriendVal}   
+                            type="text"
+                            name="EnterUser"
+                            placeholder="Username"
+                            onChange={e=> this.handleChange(e)}
+                            required/>
+                        <button onClick={this.handleClick}>Add User</button> */}
                     </div>
                     
                 </div>
