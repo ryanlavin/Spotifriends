@@ -8,7 +8,7 @@ import { Route } from 'react-router';
 import Profile from './components/profile';
 import NavBar from './components/NavBar';
 import Authenticate from './components/authenticate'
-
+import Reauthorize from './components/reauthorize'
 class App extends React.Component{
     constructor(props) {
         super(props);
@@ -44,6 +44,7 @@ class App extends React.Component{
                 <Route exact path="/matching" component={Matching}/>
                 <Route exact path="/profile" component={Profile}/>
                 <Route exact path="/authenticate" component={Authenticate}/>
+                <Route exact path="/reauthorize" component={Reauthorize}/>
             </div>
         );
     }
