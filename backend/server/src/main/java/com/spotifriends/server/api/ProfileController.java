@@ -26,13 +26,15 @@ public class ProfileController {
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping
     public String addFriend(@RequestBody UsernameSessionFriend usf) {
-        return "{\"code\":\"" + profileService.addFriend(usf.username, usf.session, usf.friend_name) + "\"}";
+        /*return "{\"code\":\"" + profileService.addFriend(usf.username, usf.session, usf.friend_name) + "\"}";*/
+        return  profileService.addFriend(usf.username, usf.session, usf.friend_name);
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
     @PutMapping
     public String changePrivacy(@RequestBody UsernameSessionPriv usp){
-        return "{\"code\":\"" + profileService.changePrivacy(usp.username, usp.session, usp.priv) + "\"}";
+        /*return "{\"code\":\"" + profileService.changePrivacy(usp.username, usp.session, usp.priv) + "\"}";*/
+        return profileService.changePrivacy(usp.username, usp.session, usp.priv);
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
