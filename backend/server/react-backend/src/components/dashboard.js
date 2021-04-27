@@ -47,7 +47,7 @@ function Dashboard(props) {
         <div className="container">
         <script>
         
-            {console.log(Cookies.get('sessionID'))}
+            {console.log("SessionID: " + Cookies.get('sessionID'))}
             
             {/* //console.log(window.accessToken);
             //getTest() */}

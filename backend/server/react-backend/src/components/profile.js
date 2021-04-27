@@ -11,24 +11,46 @@ class Profile extends Component {
             checked:false,
             friends:[],
             whiteListReady:false,
-            whiteList:<div className="friend"> friendfriend</div>,
+            //whiteList:<div className="friend"> friendfriend</div>,
             addFriendVal:"",
+            dataReady:false
         };
         this.handleChecked = this.handleChecked.bind(this);
         this.setWhitelist = this.setWhitelist.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleClick = this.handleClick.bind(this);
+        
+    }
+    componentDidMount(){
+        axios.get("http://localhost:8080/profile-api",{
+            headers:{
+                'username':Cookies.get('uname'),
+                'session': Cookies.get('sessionID')
+            }
+        }).then((response)=>{
+            console.log(response.data);
+            console.log(Cookies.get('uname'));
+            console.log(Cookies.get('sessionID'));
+            /* this.state.checked = response.data.priv;
+            this.state.friends = response.data.friends; */
 
+            this.setState({
+                checked: response.data.priv,
+                friends: response.data.friends,
+                dataReady:true
+            })
+        })
     }
     handleChecked = (checked)=>{
+        console.log("CHECKED: " + this.state.checked);
         this.setState({checked});
         axios.put("http://localhost:8080/profile-api",{
             username: Cookies.get('uname'),
             session: Cookies.get('sessionID'),
-            priv: true
+            priv: checked
         }).then((response)=>{
             console.log(response);
-            alert("Changed successfully");
+            alert("Profile set to: " + (checked ? "PRIVATE" : "PUBLIC") );
             
         })
     }
@@ -45,8 +67,10 @@ class Profile extends Component {
         }
     }
     handleChange = (event) => {
-        const {value} = event.target;
+        
+        const {value} = event.target;       
         this.setState({ addFriendVal: value },()=>{
+            /* console.log(this.state.addFriendVal); */
         });
     };
     /* handleClick(){
@@ -60,19 +84,30 @@ class Profile extends Component {
         })
     } */
     handleClick = ()=>{
+        console.log("CLICK!");
         axios.post("http://localhost:8080/profile-api",{
             username: Cookies.get('uname'),
             session: Cookies.get('sessionID'),
             friend_name: this.state.addFriendVal
         }).then((response)=>{
-            if(response.data.code != undefined && response.data.code == "SUCCESS"){
+            console.log(response);
+            if(response.data != undefined && response.data == "SUCCESS"){
                 alert("Added successfully");
+                var newFriendsArr = this.state.friends;
+                newFriendsArr.push(this.state.addFriendVal);
+                console.log(newFriendsArr);
+                this.setState({
+                    friends:newFriendsArr
+                })
             }
         })
     }
     render(){
         if(Cookies.get('sessionID') == undefined){
             return <Redirect push to="/login"/>
+        }
+        else if(!this.state.dataReady){
+            return null;
         }
         else{
         return (
@@ -87,42 +122,16 @@ class Profile extends Component {
                             {/* <input type="checkbox" name="PrivateToggle" id="PrivateToggle"/> */}
                     </label>
                     {/* WHITELISTED USERS */}
-                    {/* <h1 className = "WhitelistedUsersTitle">Whitelisted Users</h1> */}
+                    <h1 className = "WhitelistedUsersTitle">Whitelisted Users</h1>
                     {/* DISPLAY WHITELISTED USERS */}
-                    <Request
-                        instance={axios.create({
-                            baseURL:'http://localhost:8080/',
-                            timeout:5000,
-                            headers: {
-                                'username':Cookies.get('uname'),
-                                'session':Cookies.get('sessionID')
-                            }
-                        })}
-                        url="/profile-api"
-                        method='get'
-                        onSuccess={(response)=>this.setWhitelist(response.data)/* {
-                            var friends =  response.data.friends;
-                            console.log(response);
-                            return (
-                                <div className="WhitelistedUsersList">
-                                    {
-                                        friends.map(function(friend){
-                                            return <div className="friend">{friend}</div>
-                                        })
-                                    }
-                                    <div className="friend">testtesttest</div>
-
-                                </div>
-                            )
-                        } */}
-                        onError={(error)=>{
-                            console.log(error);
-                        }}
-                    />
+                    <ul className="WhitelistDisplay">
+                        <Whitelist friends={this.state.friends}/>
+                    </ul>
+                    
                     {/* {this.state.whiteList} */}
                     {/* ADD USER */}
                     <div className="AddToWhitelist">
-                    {/* <input
+                        <input
                             type="text"
                             value={this.state.addFriendVal}   
                             type="text"
@@ -130,7 +139,7 @@ class Profile extends Component {
                             placeholder="Username"
                             onChange={e=> this.handleChange(e)}
                             required/>
-                        <button onClick={this.handleClick}>Add User</button> */}
+                        <button onClick={this.handleClick}>Add User</button> 
                     </div>
                     
                 </div>
@@ -175,13 +184,19 @@ class Profile extends Component {
                     }
                     h1{
                         font-weight:normal;
-                        font-size:22px;
+                        font-size:21px;
                         color:rgb(236, 236, 236);
                         text-align:start;
                         padding-left:20px;
+            
+                    }
+                    .WhitelistDisplay{
+                        text-align:left;
+                        padding-left:40px;
                     }
                     .AddToWhitelist {
                         display:flex;
+                        padding-top:10px;
                         padding-left: 20px;
                     }
                     .AddToWhitelist input{
@@ -207,6 +222,19 @@ class Profile extends Component {
         );
         }
     }
+}
+
+function Whitelist(props){
+    var friends = Array.from(props.friends);
+
+    return(
+            (friends).map(function(friend){
+                return <li className="Friend">
+                    {friend}
+                </li>
+            })
+        
+    )
 }
 
 export default Profile;
