@@ -101,7 +101,7 @@ export default class Matching extends Component{
         });
     };
     setResults = (res) => {
-        this.setState({results:res});
+        this.setState({results:res, readyToMatch:false});
     }
     render(){
         if(Cookies.get('sessionID') == undefined){
@@ -145,10 +145,11 @@ export default class Matching extends Component{
                                                 <div className="ResultContainer">
                                                     Matching Score: {response.data.score}
                                                     <style jsx>{`
-                                                        .ResultContainer {
+                                                        .ResultContainer{
                                                             font-size:35px;
                                                             text-align: center;
                                                             padding-top:10px;
+                                                            
                                                         }
                                                     `}
                                                     </style>
