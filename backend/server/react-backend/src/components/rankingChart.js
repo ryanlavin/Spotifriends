@@ -41,8 +41,8 @@ export default class RankingChart extends Component{
         this.setState({tracks:t});
     };
     checkAccessToken(){
-        if(Cookies.get('spotifyAuthToken') == undefined 
-        && Cookies.get('sessionID') != undefined){
+        if(Cookies.get('spotifyAuthToken') === undefined 
+        && Cookies.get('sessionID') !== undefined){
             return <Redirect to="/reauthorize"/>
         }
     }
@@ -75,7 +75,7 @@ export default class RankingChart extends Component{
                 }
                 var idstring = idArray.join(',');
                 var cookieToken = Cookies.get('spotifyAuthToken');
-                if(!(cookieToken == undefined)){
+                if(!(cookieToken === undefined)){
                     axios.get("https://api.spotify.com/v1/tracks",{
                         headers:{
                             Authorization: `Bearer ${cookieToken}`
@@ -90,7 +90,7 @@ export default class RankingChart extends Component{
                     var t = tracks.map(function(element){
                         index = index + 1;
                         var match = response.data.tracks.find(track=>
-                            track.id==element.id
+                            track.id===element.id
                         );
                         var artSrc = match.album.images[1].url;
                         console.log(artSrc);
