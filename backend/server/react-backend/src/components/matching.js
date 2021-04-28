@@ -24,9 +24,7 @@ const fakeButton = <button id="FakeButton">
     <style jsx>{`
         #FakeButton{
             background-color: grey;
-        }
-        
-        
+        }  
         
     `}
     </style>
@@ -81,12 +79,7 @@ export default class Matching extends Component{
         }
     } */
     handleButton = () =>{
-        if(this.state.showButton){
-            this.setState({readyToMatch:true});
-        }
-        else{
-            alert("Please enter a valid username");
-        }
+        this.setState({readyToMatch:true});
     }
     handleChange = (event) => {
         const {value} = event.target;

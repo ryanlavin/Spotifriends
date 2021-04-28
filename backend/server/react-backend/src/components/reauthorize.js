@@ -28,7 +28,7 @@ export default function Reauthorize(){
 
 function redirect(){
 
-    if(Cookies.get('spotifyAuthToken')!= undefined){
+    if(Cookies.get('spotifyAuthToken')!== undefined){
         return <Redirect to='/dashboard'/>
     }
 }

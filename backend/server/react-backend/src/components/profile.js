@@ -13,7 +13,8 @@ class Profile extends Component {
             whiteListReady:false,
             //whiteList:<div className="friend"> friendfriend</div>,
             addFriendVal:"",
-            dataReady:false
+            dataReady:false,
+            invalid:false
         };
         this.handleChecked = this.handleChecked.bind(this);
         this.setWhitelist = this.setWhitelist.bind(this);
@@ -33,12 +34,20 @@ class Profile extends Component {
             console.log(Cookies.get('sessionID'));
             /* this.state.checked = response.data.priv;
             this.state.friends = response.data.friends; */
-
-            this.setState({
-                checked: response.data.priv,
-                friends: response.data.friends,
-                dataReady:true
-            })
+            if(response.data.priv =="INVALID"){
+                this.setState({ 
+                    invalid:true
+                })
+            }
+            else{
+                this.setState({
+                
+                    checked: response.data.priv,
+                    friends: response.data.friends,
+                    dataReady:true
+                })
+            }
+            
         })
     }
     handleChecked = (checked)=>{
@@ -56,7 +65,7 @@ class Profile extends Component {
     }
     setWhitelist = (wl)=>{
         console.log(wl);
-        if(wl != undefined){
+        if(wl !== undefined){
             this.setState({friends:wl,
                 whiteListReady:true,
                 whiteList:
@@ -125,7 +134,7 @@ class Profile extends Component {
                     <h1 className = "WhitelistedUsersTitle">Whitelisted Users</h1>
                     {/* DISPLAY WHITELISTED USERS */}
                     <ul className="WhitelistDisplay">
-                        <Whitelist friends={this.state.friends}/>
+                        {this.state.invalid?<Whitelist friends={this.state.friends}/>:<div></div>}
                     </ul>
                     
                     {/* {this.state.whiteList} */}
