@@ -15,7 +15,7 @@ export default function Reauthorize(){
             {/* {redirect()} */}
             <div className="reauthcontainer">
                 <div id="reauthmessage">
-                    Please reauthorize access to your Spotify account:
+                    Please reauthorize access to your Spotify account, then swtich to matching page and back:
                 </div>
                 <SpotifyAuth 
                     id="login-button"
