@@ -4,9 +4,17 @@ import "../css/NavBar.css";
 import Cookies from 'js-cookie';
 
 export default class NavBar extends Component{
-    
+    constructor(props){
+        super(props);
+        this.state = {
+            sessionID: this.props.sessionID
+        }
+       
+    }
     render(){
-        if(Cookies.get('sessionID')==undefined){
+        /* const sessionID = Cookies.get('sessionID'); */
+        /* const sessionID = this.props.sessionID;  */
+        if(this.state.sessionID===undefined){
             return (
                 <div className="topBar">
                 <div className="logo">
@@ -93,6 +101,9 @@ export default class NavBar extends Component{
                     </div>
                     <div className="NavBarItem">
                         <a href="/profile">PROFILE</a>
+                    </div>
+                    <div className="NavBarItem">
+                        <a href="/logout">LOGOUT</a>
                     </div>
                     {/* <div className="NavBarItem">
                         <a href="/login">LOGIN</a>

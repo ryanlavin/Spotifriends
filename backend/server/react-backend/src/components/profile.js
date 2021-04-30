@@ -134,7 +134,7 @@ class Profile extends Component {
                     <h1 className = "WhitelistedUsersTitle">Whitelisted Users</h1>
                     {/* DISPLAY WHITELISTED USERS */}
                     <ul className="WhitelistDisplay">
-                        {this.state.invalid?<Whitelist friends={this.state.friends}/>:<div></div>}
+                        {this.state.invalid?<div></div>:<Whitelist friends={this.state.friends}/>}
                     </ul>
                     
                     {/* {this.state.whiteList} */}
@@ -234,7 +234,14 @@ class Profile extends Component {
 }
 
 function Whitelist(props){
-    var friends = Array.from(props.friends);
+    var friends = [];
+    try{
+        friends = Array.from(props.friends);
+    }
+    catch(e){
+        console.log(e);
+    }
+    
 
     return(
             (friends).map(function(friend){

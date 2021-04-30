@@ -7,8 +7,10 @@ import Matching from './components/matching';
 import { Route } from 'react-router';
 import Profile from './components/profile';
 import NavBar from './components/NavBar';
-import Authenticate from './components/authenticate'
-import Reauthorize from './components/reauthorize'
+import Authenticate from './components/authenticate';
+import Reauthorize from './components/reauthorize';
+import Logout from './components/logout';
+import Cookies from 'js-cookie';
 class App extends React.Component{
     constructor(props) {
         super(props);
@@ -37,7 +39,7 @@ class App extends React.Component{
     render() {
         return (
             <div id="Background" className="App">
-                <NavBar/>
+                <NavBar sessionID={Cookies.get('sessionID')}/>
                 <Route exact path="/" component={Dashboard}/>
                 <Route exact path="/dashboard" component={Dashboard}/>
                 <Route exact path="/login" component={Login}/>
@@ -45,6 +47,7 @@ class App extends React.Component{
                 <Route exact path="/profile" component={Profile}/>
                 <Route exact path="/authenticate" component={Authenticate}/>
                 <Route exact path="/reauthorize" component={Reauthorize}/>
+                <Route exact path="/logout" component={Logout}/>
             </div>
         );
     }

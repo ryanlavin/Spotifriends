@@ -6,7 +6,8 @@ import {useHistory} from "react-router-dom";
 import Cookies from 'js-cookie';
 
 export default function Authenticate(){
-    let history = useHistory();
+    const history = useHistory();
+    
     function handleRedirect(token){
         window.accessToken = token;
         axios.post("http://localhost:8080/register-api",
@@ -29,7 +30,9 @@ export default function Authenticate(){
                 });
                 console.log(Cookies.get('sessionID'));
                 //console.log(response.data.session);
+                /* history.go(0); */
                 history.push("/dashboard");
+       
             })
         });
 
