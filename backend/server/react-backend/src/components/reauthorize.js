@@ -2,8 +2,9 @@ import React from 'react';
 import {SpotifyAuth,SpotifyAuthListener, Scopes} from 'react-spotify-auth';
 import {Redirect,useHistory} from 'react-router-dom';
 import Cookies from 'js-cookie';
-export default function Reauthorize(){
 
+export default function Reauthorize(){
+    const history = useHistory();
     return( 
         <div className="container">
             <SpotifyAuthListener
@@ -12,7 +13,6 @@ export default function Reauthorize(){
                     Cookies.set('spotifyAuthToken',token);
                 }}  
             />
-            {/* {redirect()} */}
             <div className="reauthcontainer">
                 <div id="reauthmessage">
                     Please reauthorize access to your Spotify account, then swtich to matching page and back:
@@ -24,6 +24,7 @@ export default function Reauthorize(){
                     scopes={[Scopes.userReadPrivate, Scopes.userReadEmail, Scopes.userTopRead]}
                     onAccessToken={(token)=>{
                         Cookies.set('spotifyAuthToken',token);
+                        history.push('/dashboard');
                     }}
                 />
                 <style jsx>{`
@@ -45,8 +46,8 @@ export default function Reauthorize(){
                         color:white;
                         margin-bottom:20px;
                     }
-                    
                 `}
+
                 </style>
             </div>
             
@@ -54,9 +55,8 @@ export default function Reauthorize(){
     )
 }
 
-function redirect(){
-
+/* function redirect(){
     if(Cookies.get('spotifyAuthToken')!== undefined){
         return <Redirect to='/dashboard'/>
     }
-}
+} */

@@ -5,10 +5,10 @@ import { AxiosProvider, Request, Get, Delete, Head, Post, Put, Patch, withAxios 
 import Cookies from "js-cookie";
 import {Redirect,useHistory} from "react-router-dom";
 import FormInput from "./input-component";
+import { CircularProgressbar,buildStyles } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
 
-const realButton = <button id="RealButton"
-                
->
+const realButton = <button id="RealButton">
 Match
 <style jsx>{`
     #RealButton{
@@ -134,11 +134,58 @@ export default class Matching extends Component{
                                         }
                                         onSuccess={(response)=>{
                                             console.log(this.state.uName2);
+                                            console.log(response.data.score);
+                                            var result = "Matching Score: ";
+                                            var validResult = false;
+                                            var resultVar = 0; 
+                                            if(response.data.score == "INVALID QUERY"){
+                                                result = "User does not exist";
+                                            }
+                                            else if(response.data.score === 'INVALID PRIVATE'){
+                                                result = "User is private";
+                                            }
+                                            else{
+                                                resultVar = Number(response.data.score);
+                                                resultVar = (resultVar.toFixed(2)) * 100;
+                                                result = result + resultVar + "%";
+                                                validResult = true;
+                                            }
                                             this.setResults(
                                                 <div className="ResultContainer">
-                                                    Matching Score: {response.data.score}
+                                                    {validResult ? <span  id="MATCHINGSCORE">Matching Score:</span>:<div></div>}
+                                                    {/* {result} */}
+                                                    {validResult ?
+                                                        <div className="CircleContainer">
+                                                            <CircularProgressbar value={resultVar} text={`${resultVar}%`}
+                                                            styles={buildStyles({
+                                                                pathColor:`#1db954`,
+                                                                textColor:`#1db954`,
+                                                            })
+                                                            
+                                                            }
+                                                        />
+                                                        <style jsx>{`
+                                                            .CircleContainer{
+                                                                height:20%;
+                                                                width:20%;
+                                                                font-size:35px;
+                                                                color:#1db954;
+                                                            }
+                                                            #MATCHINGSCORE{
+                                                                margin-bottom:15px;
+                                                                color:#1db954;
+                                                            }  
+                                                        `}
+                                                        </style>
+                                                        </div>
+                                                        :
+                                                    `${result}`}
                                                     <style jsx>{`
+                                                        
                                                         .ResultContainer{
+                                                            display:flex;
+                                                            flex-direction:column;
+                                                            align-items:center;
                                                             font-size:35px;
                                                             text-align: center;
                                                             padding-top:10px;

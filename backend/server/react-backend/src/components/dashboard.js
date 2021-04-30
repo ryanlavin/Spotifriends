@@ -43,10 +43,8 @@ function Dashboard(props) {
     } */
     
     return (
-        
         <div className="container">
         <script>
-        
             {console.log("SessionID: " + Cookies.get('sessionID'))}
             
             {/* //console.log(window.accessToken);
